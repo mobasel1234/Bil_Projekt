@@ -3,8 +3,8 @@ package com.example.bil_projekt.Controller;
 
 
 
-import Deniz.Car;
-import Deniz.RentalAgreement;
+import com.example.bil_projekt.Deniz.Car;
+import com.example.bil_projekt.Deniz.RentalAgreement;
 import com.example.bil_projekt.Repository.CarRepository;
 import com.example.bil_projekt.Repository.RentalRepository;
 import org.springframework.beans.factory.annotation.Autowired;

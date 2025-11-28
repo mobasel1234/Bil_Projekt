@@ -1,6 +1,6 @@
 package com.example.bil_projekt.Repository;
 
-import Deniz.RentalAgreement;
+import com.example.bil_projekt.Deniz.RentalAgreement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -13,12 +13,13 @@ public class RentalRepository {
 
     public void createRental(RentalAgreement r) {
         String sql = """
-        INSERT INTO rental_agreement
-        (car_id, customer_id, start_date, end_date, first_payment_paid, pickup_location)
-        VALUES (?, ?, ?, ?, ?, ?)
+        INSERT INTO RentalAgreement 
+        (rental_id, car_id, customer_id, start_date, end_date, first_payment_paid, pickup_location)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
         """;
 
         jdbc.update(sql,
+                r.getRental_id(),
                 r.getCar_id(),
                 r.getCustomer_id(),
                 r.getStart_date(),

@@ -1,6 +1,6 @@
 package com.example.bil_projekt.Repository;
 
-import Deniz.Car;
+import com.example.bil_projekt.Deniz.Car;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -9,18 +9,21 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class CarRepository {
 
-        @Autowired
-        private JdbcTemplate jdbc;
+    @Autowired
+    private JdbcTemplate jdbc;
 
-        public Car findByReg(String registration) {
-            String sql = "SELECT * FROM car WHERE registration_number = ?";
-            return jdbc.queryForObject(sql,
-                    new BeanPropertyRowMapper<>(Car.class),
-                    registration);
-        }
+    public Car findById(int id) {
+        String sql = "SELECT * FROM Car WHERE car_id = ?";
+        return jdbc.queryForObject(sql, new BeanPropertyRowMapper<>(Car.class), id);
+    }
 
-        public void updateStatus(int carId, String status) {
-            String sql = "UPDATE car SET status = ? WHERE car_id = ?";
-            jdbc.update(sql, status, carId);
-        }
+    public Car findByReg(String reg) {
+        String sql = "SELECT * FROM Car WHERE vin = ?";
+        return jdbc.queryForObject(sql, new BeanPropertyRowMapper<>(Car.class), reg);
+    }
+
+    public void updateStatus(int carId, String status) {
+        String sql = "UPDATE Car SET status = ? WHERE car_id = ?";
+        jdbc.update(sql, status, carId);
+    }
 }
