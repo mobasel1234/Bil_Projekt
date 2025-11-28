@@ -8,12 +8,17 @@ import org.springframework.stereotype.Service;
 public class CarService {
 
     @Autowired
-    private RentalRepository rentalRepository;
+    public RentalRepository rentalRepository;
 
     // Returnerer true hvis bilen er ledig
-    public boolean canCarBeBooked(int carId) {
-        return rentalRepository.isCarAvailable(carId);
+    public boolean CanCarBeBooked(int carId) {
+        return rentalRepository.IsCarAvailable(carId);
     }
+
+    public boolean CarHasActiveAgreement(int carId) {
+        return rentalRepository.HasActiveAgreement(carId);
+    }
+
 }
 
 
