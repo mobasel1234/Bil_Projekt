@@ -14,7 +14,7 @@ public class BookingController {
     @GetMapping("/check-car")
     public String checkCar(@RequestParam int carId) {
 
-        boolean available = carService.canCarBeBooked(carId);
+        boolean available = carService.CanCarBeBooked(carId);
 
         if (!available) {
             return "❌ Bilen er allerede udlejet — dobbelt-booking forhindret.";
@@ -22,4 +22,18 @@ public class BookingController {
 
         return "✔ Bilen er ledig og kan bookes.";
     }
+
+
+    @GetMapping("/check-active")
+    public String CheckActive(@RequestParam int carId) {
+
+        boolean active = carService.CarHasActiveAgreement(carId);
+
+        if (!active) {
+            return "❌ Fejl: Bilen har ingen aktiv aftale.";
+        }
+
+        return "✔ Bilen har en aktiv aftale.";
+    }
+
 }
