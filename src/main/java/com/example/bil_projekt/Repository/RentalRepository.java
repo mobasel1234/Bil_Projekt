@@ -28,4 +28,5 @@ public class RentalRepository {
                 r.getPickup_location()
         );
     }
+
 }
