@@ -1,8 +1,5 @@
 package com.example.bil_projekt.Controller;
 
-
-
-
 import Deniz.Car;
 import Deniz.RentalAgreement;
 import com.example.bil_projekt.Repository.CarRepository;
@@ -23,13 +20,11 @@ public class RentalController {
     @Autowired
     private RentalRepository rentalRepo;
 
-    // VIS FORMULAR
     @GetMapping("/rental/create")
     public String showForm() {
         return "createRental";
     }
 
-    // HÅNDTER POST REQUEST
     @PostMapping("/rental/create")
     public String createRental(
             @RequestParam String registration_number,
@@ -40,7 +35,6 @@ public class RentalController {
             @RequestParam String pickup_location,
             Model model
     ) {
-        // 1. Henter bilen
         Car car;
         try {
             car = carRepo.findByReg(registration_number);
@@ -49,13 +43,11 @@ public class RentalController {
             return "createRental";
         }
 
-        // 2. Se om bilen er ledig
         if (car.getStatus().equals("Udlejet")) {
             model.addAttribute("message", "Fejl: Bilen er allerede udlejet");
             return "createRental";
         }
 
-        // 3. Opretter lejeaftale
         RentalAgreement r = new RentalAgreement();
         r.setCar_id(car.getCar_id());
         r.setCustomer_id(customer_id);
@@ -64,20 +56,12 @@ public class RentalController {
         r.setFirst_payment_paid(first_payment_paid);
         r.setPickup_location(pickup_location);
 
-        // 4. Gemmer vores nye aftale
         rentalRepo.createRental(r);
 
-
-
-        // 5. Bilen bliver updateret, iforhold til status
         carRepo.updateStatus(car.getCar_id(), "Udlejet");
 
-
-
-        // 6. Meddelse bliver givet at aftalene er fuldført
         model.addAttribute("message", "Lejeaftale oprettet succesfuldt!");
 
         return "createRental";
     }
 }
-

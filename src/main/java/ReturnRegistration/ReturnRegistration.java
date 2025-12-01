@@ -12,7 +12,7 @@ public class ReturnRegistration {
             return;
         }
 
-        // 2. her bliver der Tjekket om  lejeaftale findes
+        // 2. her bliver der Tjekket om lejeaftale findes
         if (agreement == null) {
             System.out.println("Fejl: Ingen aktiv lejeaftale fundet.");
             return;
@@ -24,7 +24,7 @@ public class ReturnRegistration {
             return;
         }
 
-        // 4. Tjek at retur-dato ikke er før start, da den skal være efterstarts dato
+        // 4. Tjek at retur-dato ikke er før start, da den skal være efter startdato
         if (returnDate.isBefore(agreement.getStart_date())) {
             System.out.println("Fejl: Tilbageleveringsdato kan ikke ligge før lejeperiodens start.");
             return;
