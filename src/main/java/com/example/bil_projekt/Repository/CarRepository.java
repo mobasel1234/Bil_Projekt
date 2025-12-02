@@ -26,4 +26,11 @@ public class CarRepository {
         String sql = "UPDATE Car SET status = ? WHERE car_id = ?";
         jdbc.update(sql, status, carId);
     }
+
+    // KPI: tæller antal biler som har status Udlejet
+    public int countRentedCars() {
+        String sql = "SELECT COUNT(*) FROM Car WHERE status = 'Udlejet'";
+        return jdbc.queryForObject(sql, Integer.class);
+    }
+
 }
