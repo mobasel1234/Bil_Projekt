@@ -40,10 +40,10 @@ public class RentalController {
                     pickup_location
             );
 
-            model.addAttribute("message", "✔ Lejeaftale oprettet succesfuldt!");
+            model.addAttribute("message", " Lejeaftale oprettet succesfuldt!");
 
         } catch (Exception e) {
-            model.addAttribute("message", "❌ " + e.getMessage());
+            model.addAttribute("message", " fejl " + e.getMessage());
         }
 
         return "createRental";

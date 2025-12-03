@@ -11,10 +11,10 @@ public class RentalRepository {
     @Autowired
     private JdbcTemplate jdbc;
 
+    // TEST SETTER
     public void setJdbc(JdbcTemplate jdbc) {
         this.jdbc = jdbc;
     }
-
 
     public void createRental(RentalAgreement r) {
         String sql = """
@@ -43,8 +43,7 @@ public class RentalRepository {
         """;
 
         Integer count = jdbc.queryForObject(sql, Integer.class, carId);
-
-        return count == 0;  // bilen er ledig hvis count = 0
+        return count == 0;
     }
 
     public boolean hasActiveAgreement(int carId) {
@@ -56,9 +55,7 @@ public class RentalRepository {
         """;
 
         Integer count = jdbc.queryForObject(sql, Integer.class, carId);
-
-        return count > 0; // true hvis der er en aktiv aftale
+        return count > 0;
     }
 }
-
 
