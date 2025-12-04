@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Registrer skade</title>
+  <meta charset="UTF-8"/>
+</head>
+
+<body>
+
+<h2>Registrer skade</h2>
+
+<form action="/damages/register" method="post">
+
+  <label>Inspection ID:</label><br>
+  <input type="number" name="inspection_id" required><br><br>
+
+  <label>Beskrivelse:</label><br>
+  <textarea name="description" rows="3" cols="30"></textarea><br><br>
+
+  <label>Skade type:</label><br>
+  <select name="damage_type" required>
+    <option value="Ridse">Ridse</option>
+    <option value="Bule">Bule</option>
+    <option value="Knust rude">Knust rude</option>
+    <option value="Lak skade">Lak skade</option>
+  </select><br><br>
+
+  <label>Skade severity (1-10):</label><br>
+  <input type="number" name="severity" min="1" max="10" required><br><br>
+
+  <button type="submit">Registrer skade</button>
+
+</form>
+
+<hr>
+
+<p th:text="${message}"></p>
+
+</body>
+</html>

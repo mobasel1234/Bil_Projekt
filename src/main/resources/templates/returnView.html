@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Returneret Bil</title>
+  <meta charset="UTF-8"/>
+</head>
+
+<body>
+
+<h2>Registrér Bil Returnering</h2>
+
+<form action="/register-return" method="post">
+
+  <label>VIN nummer:</label><br>
+  <input type="text" name="Steel nummer" required><br><br>
+
+  <label>Returneringsdato:</label><br>
+  <input type="date" name="return_date" required><br><br>
+
+  <button type="submit">Registrer Returnering</button>
+
+</form>
+
+<hr>
+
+<p th:text="${message}"></p>
+
+</body>
+</html>

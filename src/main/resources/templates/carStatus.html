@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Bilstatsus</title>
+  <meta charset="UTF-8"/>
+</head>
+
+<body>
+
+<h2>Status for alle biler</h2>
+
+<table border="1">
+  <tr>
+    <th>Car ID</th>
+    <th>VIN</th>
+    <th>Model</th>
+    <th>Status</th>
+  </tr>
+
+  <tr th:each="car : ${cars}">
+    <td th:text="${car.car_id}"></td>
+    <td th:text="${car.vin}"></td>
+    <td th:text="${car.model}"></td>
+    <td th:text="${car.status}"></td>
+  </tr>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+package com.example.bil_projekt.Service;
+
+
+import com.example.bil_projekt.model.DamageMatrix;
+import com.example.bil_projekt.model.DamageReport;
+import com.example.bil_projekt.Repository.DamageMatrixRepository;
+import com.example.bil_projekt.Repository.DamageRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class DamageService {
+
+    @Autowired
+    private DamageRepository damageRepo;
+
+    @Autowired
+    private DamageMatrixRepository matrixRepo;
+
+    public double calculatePrice(String type, double severity) {
+        DamageMatrix m = matrixRepo.findByType(type);
+        return m.getPrice() * severity;
+    }
+
+    public void registerDamage(int inspectionId, String description, String type, double severity) {
+
+        double price = calculatePrice(type, severity);
+
+        DamageReport r = new DamageReport();
+        r.setInspection_id(inspectionId);
+        r.setDescription(description);
+        r.setDamage_type(type);
+        r.setSeverity(severity);
+        r.setCost_estimate(price);
+
+        damageRepo.createDamageReport(r);
+    }
+}
