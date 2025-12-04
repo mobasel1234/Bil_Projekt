@@ -1,7 +1,4 @@
-package com.example.bil_projekt.CarBuisness;
-
-import com.example.bil_projekt.CarBuisness.Car;
-import com.example.bil_projekt.CarBuisness.RentalAgreement;
+package com.example.bil_projekt.model;
 
 import java.time.LocalDate;
 

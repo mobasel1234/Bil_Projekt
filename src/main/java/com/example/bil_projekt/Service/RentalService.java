@@ -4,8 +4,8 @@ import com.example.bil_projekt.Repository.CarRepository;
 import com.example.bil_projekt.Repository.CustomerRepository;
 import com.example.bil_projekt.Repository.RentalRepository;
 import com.example.bil_projekt.CustomerInfo.Customer;
-import com.example.bil_projekt.CarBuisness.Car;
-import com.example.bil_projekt.CarBuisness.RentalAgreement;
+import com.example.bil_projekt.model.Car;
+import com.example.bil_projekt.model.RentalAgreement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

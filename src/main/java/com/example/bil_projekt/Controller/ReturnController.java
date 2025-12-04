@@ -1,8 +1,8 @@
 package com.example.bil_projekt.Controller;
 
-import com.example.bil_projekt.CarBuisness.Car;
-import com.example.bil_projekt.CarBuisness.RentalAgreement;
-import com.example.bil_projekt.CarBuisness.ReturnRegistration;
+import com.example.bil_projekt.model.Car;
+import com.example.bil_projekt.model.RentalAgreement;
+import com.example.bil_projekt.model.ReturnRegistration;
 import com.example.bil_projekt.Repository.CarRepository;
 import com.example.bil_projekt.Repository.RentalRepository;
 import org.springframework.beans.factory.annotation.Autowired;

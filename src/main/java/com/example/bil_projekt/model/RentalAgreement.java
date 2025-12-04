@@ -1,4 +1,4 @@
-package com.example.bil_projekt.CarBuisness;
+package com.example.bil_projekt.model;
 
 import java.time.LocalDate;
 

@@ -1,7 +1,7 @@
 package com.example.bil_projekt;
 
 import com.example.bil_projekt.Controller.CarController;
-import com.example.bil_projekt.CarBuisness.Car;
+import com.example.bil_projekt.model.Car;
 import com.example.bil_projekt.Repository.CarRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

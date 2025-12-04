@@ -1,6 +1,6 @@
 package com.example.bil_projekt;
 
-import com.example.bil_projekt.CarBuisness.RentalAgreement;
+import com.example.bil_projekt.model.RentalAgreement;
 import com.example.bil_projekt.Repository.CarRepository;
 import com.example.bil_projekt.Repository.RentalRepository;
 import org.junit.jupiter.api.Test;
