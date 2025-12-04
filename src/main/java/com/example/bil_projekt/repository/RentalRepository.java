@@ -5,6 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
+
+
+
 @Repository
 public class RentalRepository {
 
@@ -57,5 +61,34 @@ public class RentalRepository {
         Integer count = jdbc.queryForObject(sql, Integer.class, carId);
         return count > 0;
     }
+
+    public RentalAgreement findActiveRental(int carId) {
+        String sql = "SELECT * FROM RentalAgreement WHERE car_id = ? AND end_date IS NULL";
+
+        try {
+            return jdbc.queryForObject(sql,
+                    (rs, rowNum) -> {
+                        RentalAgreement r = new RentalAgreement();
+                        r.setRental_id(rs.getInt("rental_id"));
+                        r.setCar_id(rs.getInt("car_id"));
+                        r.setCustomer_id(rs.getInt("customer_id"));
+                        r.setStart_date(rs.getDate("start_date").toLocalDate());
+                        r.setEnd_date(rs.getDate("end_date") == null ? null : rs.getDate("end_date").toLocalDate());
+                        r.setFirst_payment_paid(rs.getBoolean("first_payment_paid"));
+                        r.setPickup_location(rs.getString("pickup_location"));
+                        return r;
+                    },
+                    carId);
+
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public void updateEndDate(int rentalId, LocalDate endDate) {
+        String sql = "UPDATE RentalAgreement SET end_date = ? WHERE rental_id = ?";
+        jdbc.update(sql, endDate, rentalId);
+    }
+
 }
 

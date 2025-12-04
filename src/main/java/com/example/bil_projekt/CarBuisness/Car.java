@@ -1,11 +1,9 @@
 package com.example.bil_projekt.CarBuisness;
 
-
-
 public class Car {
 
     private int car_id;
-    private String vin;
+    private String steelNummer;
     private String brand;
     private String model;
     private String trim_level;
@@ -15,7 +13,7 @@ public class Car {
 
     public Car() {}
 
-    public int getCar_id() {              // <-- MATCHER car.getCar_id()
+    public int getCar_id() {
         return car_id;
     }
 
@@ -23,12 +21,12 @@ public class Car {
         this.car_id = car_id;
     }
 
-    public String getVin() {
-        return vin;
+    public String getSteelNummer() {
+        return steelNummer;
     }
 
-    public void setVin(String vin) {
-        this.vin = vin;
+    public void setSteelNummer(String steelNummer) {
+        this.steelNummer = steelNummer;
     }
 
     public String getBrand() {
@@ -71,7 +69,7 @@ public class Car {
         this.registration_tax = registration_tax;
     }
 
-    public String getStatus() {           // <-- MATCHER car.getStatus()
+    public String getStatus() {
         return status;
     }
 
@@ -79,6 +77,3 @@ public class Car {
         this.status = status;
     }
 }
-
-
-
