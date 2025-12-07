@@ -16,7 +16,7 @@ public class BilProjektApplication {
 
         String url = "jdbc:mysql://localhost:3306";
         String user = "root";
-        String password = "Mahamed12";
+        String password = "Politi123";
 
         try (Connection conn = DriverManager.getConnection(url, user, password)) {
             Statement stmt = conn.createStatement();
