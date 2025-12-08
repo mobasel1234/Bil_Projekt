@@ -1,4 +1,4 @@
-package com.example.bil_projekt.CustomerInfo;
+package com.example.bil_projekt.model;
 
 public class Customer {
 

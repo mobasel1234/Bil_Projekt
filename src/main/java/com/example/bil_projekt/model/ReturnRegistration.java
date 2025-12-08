@@ -37,7 +37,7 @@ public class ReturnRegistration {
         car.setStatus("Tilbageleveret - Afventer skadesvurdering");
 
         // 7. Bekræftelse
-        System.out.println("Bil med stelnummer: " + car.getSteelNummer() + " er nu returneret.");
+        System.out.println("Bil med stelnummer: " + car.getSteelNumber() + " er nu returneret.");
         System.out.println("Ny status: " + car.getStatus());
         System.out.println("Returneringsdato: " + returnDate);
     }

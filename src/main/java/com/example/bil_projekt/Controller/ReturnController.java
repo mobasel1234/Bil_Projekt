@@ -1,13 +1,15 @@
 package com.example.bil_projekt.Controller;
 
+
+import com.example.bil_projekt.Repository.CarRepository;
+import com.example.bil_projekt.Repository.RentalRepository;
 import com.example.bil_projekt.model.Car;
 import com.example.bil_projekt.model.RentalAgreement;
 import com.example.bil_projekt.model.ReturnRegistration;
-import com.example.bil_projekt.Repository.CarRepository;
-import com.example.bil_projekt.Repository.RentalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -24,26 +26,46 @@ public class ReturnController {
 
     private ReturnRegistration returnReg = new ReturnRegistration();
 
+    // Vis formular
+    @GetMapping("/register-return")
+    public String showReturnForm() {
+        return "returnView";
+    }
+
+    // Håndter returnering
     @PostMapping("/register-return")
     public String registerReturn(
-            @RequestParam String vin,
+            @RequestParam String steelNumber,
             @RequestParam String return_date,
             Model model
     ) {
+        try {
+            Car car = carRepo.findByReg(steelNumber);
+            if (car == null) {
+                model.addAttribute("message", " Bil blev ikke fundet");
+                return "returnView";
+            }
 
-        Car car = carRepo.findByReg(vin);
+            RentalAgreement agreement = rentalRepo.findActiveRental(car.getCar_id());
+            if (agreement == null) {
+                model.addAttribute("message", " Ingen aktiv lejeaftale fundet");
+                return "returnView";
+            }
 
-        RentalAgreement agreement = rentalRepo.findActiveRental(car.getCar_id());
+            LocalDate date = LocalDate.parse(return_date);
 
-        LocalDate date = LocalDate.parse(return_date);
+            returnReg.registerReturn(car, agreement, date);
 
-        returnReg.registerReturn(car, agreement, date);
+            rentalRepo.updateEndDate(agreement.getRental_id(), date);
+            carRepo.updateStatus(car.getCar_id(), car.getStatus());
 
-        rentalRepo.updateEndDate(agreement.getRental_id(), date);
-        carRepo.updateStatus(car.getCar_id(), car.getStatus());
+            model.addAttribute("message", " Bilen er returneret!");
 
-        model.addAttribute("message", "Bilen er returneret!");
+        } catch (Exception e) {
+            model.addAttribute("message", " Fejl: " + e.getMessage());
+        }
 
         return "returnView";
     }
 }
+

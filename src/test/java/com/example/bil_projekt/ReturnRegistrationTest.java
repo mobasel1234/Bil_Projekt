@@ -22,7 +22,7 @@ public class ReturnRegistrationTest {
 
         car = new Car();
         car.setCar_id(1);
-        car.setSteelNummer("VIN123");
+        car.setSteelNumber("VIN123");
         car.setStatus("Udlejet");
 
         agreement = new RentalAgreement();

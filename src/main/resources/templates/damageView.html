@@ -3,38 +3,108 @@
 <head>
   <title>Registrer skade</title>
   <meta charset="UTF-8"/>
+
+  <!-- LINK TIL DIT CSS -->
+  <link rel="stylesheet" th:href="@{/damageView.css}">
 </head>
 
 <body>
 
-<h2>Registrer skade</h2>
+<div class="damage-page">
 
-<form action="/damages/register" method="post">
+  <!-- HEADER -->
+  <div class="damage-page-header">
+    <h1 class="damage-page-title">Registrer skade</h1>
+    <p class="damage-page-subtitle">Intern skadesregistrering</p>
+  </div>
 
-  <label>Inspection ID:</label><br>
-  <input type="number" name="inspection_id" required><br><br>
+  <!-- LAYOUT -->
+  <div class="damage-layout">
 
-  <label>Beskrivelse:</label><br>
-  <textarea name="description" rows="3" cols="30"></textarea><br><br>
+    <!-- VENSTRE SIDE : FORM -->
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Skadeinformation</div>
+          <div class="card-subtitle">Indtast detaljer om skaden</div>
+        </div>
+      </div>
 
-  <label>Skade type:</label><br>
-  <select name="damage_type" required>
-    <option value="Ridse">Ridse</option>
-    <option value="Bule">Bule</option>
-    <option value="Knust rude">Knust rude</option>
-    <option value="Lak skade">Lak skade</option>
-  </select><br><br>
+      <form class="damage-form"
+            th:action="@{/damages/register}"
+            method="post">
 
-  <label>Skade severity (1-10):</label><br>
-  <input type="number" name="severity" min="1" max="10" required><br><br>
+        <!-- Inspection ID -->
+        <div class="form-group">
+          <label class="form-label">Inspection ID <span class="required">*</span></label>
+          <input class="form-control"
+                 type="number"
+                 name="inspection_id"
+                 placeholder="Indtast inspection ID"
+                 required>
+        </div>
 
-  <button type="submit">Registrer skade</button>
+        <!-- Description -->
+        <div class="form-group">
+          <label class="form-label">Beskrivelse</label>
+          <textarea class="form-textarea"
+                    name="description"
+                    placeholder="Kort beskrivelse af skaden..."
+          ></textarea>
+        </div>
 
-</form>
+        <!-- Damage Type -->
+        <div class="form-group">
+          <label class="form-label">Skade type <span class="required">*</span></label>
+          <select class="form-select" name="damage_type" required>
+            <option value="">Vælg skade type...</option>
+            <option value="Ridse">Ridse</option>
+            <option value="Bule">Bule</option>
+            <option value="Knust rude">Knust rude</option>
+            <option value="Lak skade">Lak skade</option>
+          </select>
+        </div>
 
-<hr>
+        <!-- Severity -->
+        <div class="form-group">
+          <label class="form-label">Skade severity (1-10)</label>
+          <input class="form-control"
+                 type="number"
+                 name="severity"
+                 min="1"
+                 max="10"
+                 placeholder="Vælg en værdi mellem 1-10"
+                 required>
+        </div>
 
-<p th:text="${message}"></p>
+        <!-- BUTTONS -->
+        <div class="btn-row">
+          <button type="submit" class="btn btn-primary">Registrer skade</button>
+        </div>
+
+        <!-- FEEDBACK -->
+        <div th:if="${message}" class="feedback feedback-success" th:text="${message}"></div>
+        <div th:if="${error}" class="feedback feedback-error" th:text="${error}"></div>
+
+      </form>
+    </div>
+
+    <!-- HØJRE SIDE: KAN bruges til historik senere -->
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Skadehistorik</div>
+          <div class="card-subtitle">Viser registrerede skader (valgfrit)</div>
+        </div>
+      </div>
+
+      <p class="text-muted">
+        Her kan du senere vise historik over skader på bilen baseret på inspection_id.
+      </p>
+    </div>
+
+  </div>
+</div>
 
 </body>
 </html>
