@@ -19,4 +19,12 @@ public class KpiController {
 
         return kpiService.getRentedCarsCount();
     }
+
+    @GetMapping("/kpi/activePrice")
+    @ResponseBody
+    public String getActivePrice() {
+        double total = kpiService.getActiveRentalTotalPrice();
+        return "Samlet pris på aktive aftaler: " + total + " kr";
+    }
+
 }

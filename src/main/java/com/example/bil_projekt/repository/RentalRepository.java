@@ -88,5 +88,12 @@ public class RentalRepository {
 
         jdbc.update(sql, newEndDate, rentalId);
     }
+
+    public Double sumActiveRentalPrices() {
+        String sql = "SELECT SUM(monthly_price) FROM RentalAgreement WHERE end_date IS NULL";
+        Double result = jdbc.queryForObject(sql, Double.class);
+        return result != null ? result : 0.0;
+    }
+
 }
 
