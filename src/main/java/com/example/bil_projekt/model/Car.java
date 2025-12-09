@@ -3,7 +3,7 @@ package com.example.bil_projekt.model;
 public class Car {
 
     private int car_id;
-    private String steelNummer;
+    private String steelNumber;
     private String brand;
     private String model;
     private String trim_level;
@@ -21,12 +21,12 @@ public class Car {
         this.car_id = car_id;
     }
 
-    public String getSteelNummer() {
-        return steelNummer;
+    public String getSteelNumber() {
+        return steelNumber;
     }
 
-    public void setSteelNummer(String steelNummer) {
-        this.steelNummer = steelNummer;
+    public void setSteelNumber(String steelNumber) {
+        this.steelNumber = steelNumber;
     }
 
     public String getBrand() {

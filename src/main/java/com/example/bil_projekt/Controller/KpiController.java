@@ -16,6 +16,7 @@ public class KpiController {
     @GetMapping("/kpi/rented")
     @ResponseBody
     public int getRentedCarsKpi() {
+
         return kpiService.getRentedCarsCount();
     }
 }

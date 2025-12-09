@@ -1,6 +1,6 @@
 package com.example.bil_projekt.Repository;
 
-import com.example.bil_projekt.CustomerInfo.Customer;
+import com.example.bil_projekt.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;

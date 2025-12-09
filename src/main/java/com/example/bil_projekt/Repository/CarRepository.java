@@ -38,4 +38,13 @@ public class CarRepository {
         String sql = "UPDATE Car SET status = ? WHERE car_id = ?";
         jdbc.update(sql, status, carId);
     }
+    public int findCarIdByInspectionId(int inspectionId) {
+        String sql = """
+        SELECT car_id 
+        FROM Inspection
+        WHERE inspection_id = ?
+    """;
+        return jdbc.queryForObject(sql, Integer.class, inspectionId);
+    }
+
 }

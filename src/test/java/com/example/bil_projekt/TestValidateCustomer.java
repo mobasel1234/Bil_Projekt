@@ -4,7 +4,7 @@ package com.example.bil_projekt;
 import com.example.bil_projekt.model.Car;
 import com.example.bil_projekt.Repository.CarRepository;
 import com.example.bil_projekt.Repository.RentalRepository;
-import com.example.bil_projekt.CustomerInfo.Customer;
+import com.example.bil_projekt.model.Customer;
 import com.example.bil_projekt.Repository.CustomerRepository;
 import com.example.bil_projekt.Service.RentalService;
 import org.junit.jupiter.api.Test;
