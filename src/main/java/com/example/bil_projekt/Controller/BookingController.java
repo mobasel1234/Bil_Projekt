@@ -10,30 +10,21 @@ public class BookingController {
     @Autowired
     private CarService carService;
 
-    // Eksempel: http://localhost:8080/check-car?carId=2
     @GetMapping("/check-car")
     public String checkCar(@RequestParam int carId) {
-
-        boolean available = carService.CanCarBeBooked(carId);
-
-        if (!available) {
-            return "❌ Bilen er allerede udlejet — dobbelt-booking forhindret.";
-        }
-
-        return "✔ Bilen er ledig og kan bookes.";
+        boolean available = carService.canCarBeBooked(carId);
+        return available
+                ? "Bilen er ledig og kan bookes."
+                : "Bilen er allerede udlejet — dobbelt-booking forhindret.";
     }
-
 
     @GetMapping("/check-active")
-    public String CheckActive(@RequestParam int carId) {
-
-        boolean active = carService.CarHasActiveAgreement(carId);
-
-        if (!active) {
-            return "❌ Fejl: Bilen har ingen aktiv aftale.";
-        }
-
-        return "✔ Bilen har en aktiv aftale.";
+    public String checkActive(@RequestParam int carId) {
+        boolean active = carService.carHasActiveAgreement(carId);
+        return active
+                ? "Bilen har en aktiv aftale."
+                : "Fejl: Bilen har ingen aktiv aftale.";
     }
-
 }
+
+

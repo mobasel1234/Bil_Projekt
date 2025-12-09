@@ -7,22 +7,23 @@ import org.springframework.stereotype.Service;
 @Service
 public class CarService {
 
-    @Autowired
-    public RentalRepository rentalRepository;
 
-    public void setRentalRepository(RentalRepository repo) {
-        this.rentalRepository = repo;
+        @Autowired
+        private RentalRepository rentalRepository;
+
+        public void setRentalRepository(RentalRepository repo) {
+            this.rentalRepository = repo;
+        }
+
+        public boolean canCarBeBooked(int carId) {
+            return rentalRepository.isCarAvailable(carId);
+        }
+
+        public boolean carHasActiveAgreement(int carId) {
+            return rentalRepository.hasActiveAgreement(carId);
+        }
     }
 
-    // Returnerer true hvis bilen er ledig
-    public boolean CanCarBeBooked(int carId) {
-        return rentalRepository.IsCarAvailable(carId);
-    }
 
-    public boolean CarHasActiveAgreement(int carId) {
-        return rentalRepository.HasActiveAgreement(carId);
-    }
-
-}
 
 

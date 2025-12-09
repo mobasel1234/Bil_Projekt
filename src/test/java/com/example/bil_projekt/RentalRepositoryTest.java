@@ -22,11 +22,11 @@ public class RentalRepositoryTest {
         )).thenReturn(1);
 
         RentalRepository repo = new RentalRepository();
-        repo.jdbc = mockJdbc; // injicer mock
+        repo.setJdbc(mockJdbc);
 
-        boolean result = repo.HasActiveAgreement(5);
+        boolean result = repo.hasActiveAgreement(5);
 
-        assertTrue(result);   // happy flow
+        assertTrue(result);
     }
 
     @Test
@@ -41,10 +41,10 @@ public class RentalRepositoryTest {
         )).thenThrow(new RuntimeException("DB error"));
 
         RentalRepository repo = new RentalRepository();
-        repo.jdbc = mockJdbc;
+        repo.setJdbc(mockJdbc);
 
         assertThrows(RuntimeException.class, () -> {
-            repo.HasActiveAgreement(5);
+            repo.hasActiveAgreement(5);
         });
     }
 

@@ -13,48 +13,48 @@ public class CarServiceTest {
     void testCanCarBeBooked_HappyFlow() {
         RentalRepository mockRepo = Mockito.mock(RentalRepository.class);
 
-        Mockito.when(mockRepo.IsCarAvailable(5)).thenReturn(true);
+        Mockito.when(mockRepo.isCarAvailable(5)).thenReturn(true);
 
         CarService service = new CarService();
         service.setRentalRepository(mockRepo);
 
-        assertTrue(service.CanCarBeBooked(5));
+        assertTrue(service.canCarBeBooked(5));
     }
 
     @Test
     void testCanCarBeBooked_ExceptionFlow() {
         RentalRepository mockRepo = Mockito.mock(RentalRepository.class);
 
-        Mockito.when(mockRepo.IsCarAvailable(5))
+        Mockito.when(mockRepo.isCarAvailable(5))
                 .thenThrow(new RuntimeException("Database error"));
 
         CarService service = new CarService();
         service.setRentalRepository(mockRepo);
 
-        assertThrows(RuntimeException.class, () -> service.CanCarBeBooked(5));
+        assertThrows(RuntimeException.class, () -> service.canCarBeBooked(5));
     }
 
     @Test
     void testCarHasActiveAgreement_HappyFlow() {
         RentalRepository mockRepo = Mockito.mock(RentalRepository.class);
 
-        Mockito.when(mockRepo.HasActiveAgreement(10)).thenReturn(true);
+        Mockito.when(mockRepo.hasActiveAgreement(10)).thenReturn(true);
 
         CarService service = new CarService();
         service.setRentalRepository(mockRepo);
 
-        assertTrue(service.CarHasActiveAgreement(10));
+        assertTrue(service.carHasActiveAgreement(10));
     }
 
     @Test
     void testCarHasActiveAgreement_NoAgreement() {
         RentalRepository mockRepo = Mockito.mock(RentalRepository.class);
 
-        Mockito.when(mockRepo.HasActiveAgreement(10)).thenReturn(false);
+        Mockito.when(mockRepo.hasActiveAgreement(10)).thenReturn(false);
 
         CarService service = new CarService();
         service.setRentalRepository(mockRepo);
 
-        assertFalse(service.CarHasActiveAgreement(10));
+        assertFalse(service.carHasActiveAgreement(10));
     }
 }
