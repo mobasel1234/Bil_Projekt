@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Alarmer</title>
+
+  <!-- KORREKT Thymeleaf CSS-link (samme som carStatus) -->
+  <link rel="stylesheet" th:href="@{/alarm.css}">
+</head>
+
+<body>
+
+<div class="container">
+  <h1>Aktive alarmer</h1>
+
+  <table>
+    <thead>
+    <tr>
+      <th>Bil ID</th>
+      <th>Alarmtype</th>
+      <th>Dato</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="alarm : ${alarms}">
+      <td th:text="${alarm.car_id}"></td>
+      <td th:text="${alarm.type}"></td>
+      <td th:text="${alarm.triggered_at}"></td>
+    </tr>
+    </tbody>
+  </table>
+
+  <a href="/dashBoard">Tilbage til dashboard</a>
+</div>
+
+</body>
+</html>

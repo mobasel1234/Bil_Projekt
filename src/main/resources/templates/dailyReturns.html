@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Dagens Returneringer</title>
+
+  <!-- ✅ DETTE LINK VIRKER 100 % -->
+  <link rel="stylesheet" th:href="@{/dailyReturns.css}">
+</head>
+
+<body>
+
+<div class="daily-return-page">
+
+  <h1>Biler der returneres i dag</h1>
+
+  <table class="return-table">
+    <thead>
+    <tr>
+      <th>Leje ID</th>
+      <th>Bil ID</th>
+      <th>Kunde ID</th>
+      <th>Slutdato</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="r : ${returns}">
+      <td th:text="${r.rental_id}"></td>
+      <td th:text="${r.car_id}"></td>
+      <td th:text="${r.customer_id}"></td>
+      <td th:text="${r.end_date}"></td>
+    </tr>
+    </tbody>
+  </table>
+
+  <br>
+
+  <a href="/dashBoard" class="btn btn-primary">Tilbage til dashboard</a>
+
+</div>
+
+</body>
+</html>

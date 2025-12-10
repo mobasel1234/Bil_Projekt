@@ -7,6 +7,8 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class RentalRepository {
 
@@ -94,6 +96,16 @@ public class RentalRepository {
         Double result = jdbc.queryForObject(sql, Double.class);
         return result != null ? result : 0.0;
     }
+    public List<RentalAgreement> findReturnsToday() {
+        String sql = """
+        SELECT *
+        FROM RentalAgreement
+        WHERE end_date = CURDATE()
+    """;
+
+        return jdbc.query(sql, new BeanPropertyRowMapper<>(RentalAgreement.class));
+    }
+
 
 }
 
