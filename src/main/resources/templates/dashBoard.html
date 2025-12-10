@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Dashboard</title>
 
-    <!-- CSS til dashboard -->
     <link rel="stylesheet" th:href="@{/dashBoard.css}">
 </head>
 
@@ -13,7 +12,6 @@
 <div class="dashboard">
 
     <h1>Bilabonnement – Intern Dashboard</h1>
-    <p>Vælg en funktion:</p>
 
     <div class="dashboard-buttons">
 
@@ -25,7 +23,11 @@
 
         <a class="dash-btn" href="/cars/status">Bilstatus</a>
 
-        <a class="dash-btn" href="/return">Registrer tilbagelevering</a>
+        <a class="dash-btn" href="/register-return">Registrer tilbagelevering</a>
+
+        <a class="dash-btn" href="/damage-matrix">Skadesmatrix</a>
+
+        <a class="dash-btn" href="/deliveries">Udleveringsliste</a>
 
         <a class="dash-btn" href="/kpi/rented">KPI Dashboard</a>
 

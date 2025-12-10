@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Opret Bil</title>
+    <link rel="stylesheet" th:href="@{/carStatus.css}">
+</head>
+
+<body>
+<h1>Opret ny bil</h1>
+
+<form action="/cars/create" method="post">
+
+    <label>Stelnummer:</label>
+    <input type="text" name="steelNumber" required><br><br>
+
+    <label>Mærke:</label>
+    <input type="text" name="brand" required><br><br>
+
+    <label>Model:</label>
+    <input type="text" name="model" required><br><br>
+
+    <label>Status:</label>
+    <select name="status">
+        <option value="Ledig">Ledig</option>
+        <option value="Udlejet">Udlejet</option>
+        <option value="Skadet">Skadet</option>
+    </select><br><br>
+
+    <button type="submit">Opret bil</button>
+</form>
+
+<p th:text="${message}"></p>
+
+</body>
+</html>

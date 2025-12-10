@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Skade Matrix</title>
+    <link rel="stylesheet" th:href="@{/tables.css}">
+</head>
+
+<body>
+
+<h1>Skade Matrix</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>Damage Type</th>
+        <th>Price</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="row : ${matrix}">
+        <td th:text="${row.damage_type}"></td>
+        <td th:text="${row.price}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

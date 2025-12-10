@@ -14,6 +14,17 @@ public class CarRepository {
     @Autowired
     private JdbcTemplate jdbc;
 
+    public void addCar(String steelNumber, String brand, String model, String status) {
+        String sql = """
+        INSERT INTO Car (steelNumber, brand, model, status)
+        VALUES (?, ?, ?, ?)
+    """;
+
+        jdbc.update(sql, steelNumber, brand, model, status);
+    }
+
+
+
     public Car findById(int id) {
         String sql = "SELECT * FROM Car WHERE car_id = ?";
         return jdbc.queryForObject(sql, new BeanPropertyRowMapper<>(Car.class), id);
