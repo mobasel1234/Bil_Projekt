@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Lagerstatus</title>
+  <link rel="stylesheet" th:href="@{/lagerStatus.css}">
 </head>
 
 <body>
@@ -12,7 +13,7 @@
 <table border="1">
   <tr>
     <th>Car ID</th>
-    <th>VIN</th>
+    <th>Steel number</th>
     <th>Brand</th>
     <th>Model</th>
     <th>Status</th>
@@ -20,7 +21,7 @@
 
   <tr th:each="car : ${cars}">
     <td th:text="${car.car_id}"></td>
-    <td th:text="${car.vin}"></td>
+    <td th:text="${car.steelNumber}"></td>
     <td th:text="${car.brand}"></td>
     <td th:text="${car.model}"></td>
     <td th:text="${car.status}"></td>
