@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class AlarmRepository {
@@ -72,4 +73,9 @@ public class AlarmRepository {
     public void createDS3Alarm() {
         createAlarm(0, "DS3 UNDER 5");
     }
+    public List<Map<String, Object>> getAllActiveAlarms() {
+        String sql = "SELECT * FROM Alarm WHERE resolved = false";
+        return jdbc.queryForList(sql);
+    }
+
 }

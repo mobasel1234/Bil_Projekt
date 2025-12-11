@@ -1,5 +1,6 @@
 package com.example.bil_projekt.Controller;
 
+import org.springframework.ui.Model; // ✅ KORREKT MODEL
 import com.example.bil_projekt.Service.AlarmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,5 +32,11 @@ public class AlarmController {
     public String runAllAlarms() {
         alarmService.checkAllAlarms();
         return "ALLE alarmer opdateret!";
+    }
+
+    @GetMapping("/alarms")
+    public String showAlarmsPage(Model model) {
+        model.addAttribute("alarms", alarmService.getAllActiveAlarms());
+        return "alarmList";  // alarmList.html
     }
 }
