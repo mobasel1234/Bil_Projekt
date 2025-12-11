@@ -36,7 +36,7 @@ public class CarRepository {
 
 
     public Car findByReg(String reg) {
-        String sql = "SELECT * FROM Car WHERE vin = ?";
+        String sql = "SELECT * FROM Car WHERE steelNummer = ?";
         return jdbc.queryForObject(sql, new BeanPropertyRowMapper<>(Car.class), reg);
     }
     public int countRentedCars() {
@@ -52,7 +52,7 @@ public class CarRepository {
     public int findCarIdByInspectionId(int inspectionId) {
         String sql = """
         SELECT car_id 
-        FROM Inspection
+        FROM ReturnInspection
         WHERE inspection_id = ?
     """;
         return jdbc.queryForObject(sql, Integer.class, inspectionId);
