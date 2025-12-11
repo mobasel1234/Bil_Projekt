@@ -12,11 +12,24 @@ public class AlarmController {
     @Autowired
     private AlarmService alarmService;
 
-    // Manuel trigger til alarm-check
     @GetMapping("/alarm/damage-check")
     @ResponseBody
     public String runDamageAlarmCheck() {
         alarmService.checkDamageAlarms();
-        return "Alarm-scan gennemført!";
+        return "Skade-alarm scan gennemført!";
+    }
+
+    @GetMapping("/alarm/ds3-check")
+    @ResponseBody
+    public String runDS3AlarmCheck() {
+        alarmService.checkDS3Alarm();
+        return "DS3 alarm scan gennemført!";
+    }
+
+    @GetMapping("/alarm/check-all")
+    @ResponseBody
+    public String runAllAlarms() {
+        alarmService.checkAllAlarms();
+        return "ALLE alarmer opdateret!";
     }
 }

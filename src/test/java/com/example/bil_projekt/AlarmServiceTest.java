@@ -1,36 +1,54 @@
 package com.example.bil_projekt;
 
-import com.example.bil_projekt.Service.AlarmService;
 import com.example.bil_projekt.Repository.AlarmRepository;
+import com.example.bil_projekt.Service.AlarmService;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.List;
 
-@SpringBootTest
-public class AlarmServiceTest {
+import static org.mockito.Mockito.*;
 
-    @Autowired
+@ExtendWith(MockitoExtension.class)
+class AlarmServiceTest {
+
+    @Mock
+    private AlarmRepository alarmRepo;
+
+    @InjectMocks
     private AlarmService alarmService;
 
-    @Autowired
-    private AlarmRepository alarmRepository;
-
+    // ✅ Test 1: Skadealarm oprettes
     @Test
-    void testDamageAlarmScanRunsWithoutCrash() {
-        // Act
+    void testDamageAlarmCreated() {
+        when(alarmRepo.findCarsInDamageOver3Days()).thenReturn(List.of(1));
+
         alarmService.checkDamageAlarms();
 
-        // Assert – vi tester at systemet kører fejlfrit
-        assertTrue(true, "Alarm scan kørte uden fejl");
+        verify(alarmRepo).createAlarm(1, "SKADE OVER 3 DAGE");
+
     }
 
+    // ✅ Test 2: DS3-alarm oprettes når under 5
     @Test
-    void testCarsInDamageOver3DaysQuery() {
-        var result = alarmRepository.findCarsInDamageOver3Days();
+    void testDS3AlarmCreatedWhenBelow5() {
+        when(alarmRepo.countDS3Cars()).thenReturn(3);
 
-        // Vi tester bare at listen ikke er NULL (må gerne være tom)
-        assertNotNull(result);
+        alarmService.checkDS3Alarm();
+
+        verify(alarmRepo).createDS3Alarm();
+    }
+
+    // ✅ Test 3: DS3-alarm oprettes IKKE når nok biler
+    @Test
+    void testDS3AlarmNotCreatedWhenEnoughCars() {
+        when(alarmRepo.countDS3Cars()).thenReturn(7);
+
+        alarmService.checkDS3Alarm();
+
+        verify(alarmRepo, never()).createDS3Alarm();
     }
 }
