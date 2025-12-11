@@ -37,6 +37,7 @@ public class AlarmController {
     @GetMapping("/alarms")
     public String showAlarmsPage(Model model) {
         model.addAttribute("alarms", alarmService.getAllActiveAlarms());
-        return "alarmList";  // alarmList.html
+        return "alarmView";   //  ← RET HER
     }
+
 }
