@@ -2,6 +2,7 @@ package com.example.bil_projekt.Service;
 
 import com.example.bil_projekt.Repository.CarRepository;
 import com.example.bil_projekt.Repository.CustomerRepository;
+import com.example.bil_projekt.Repository.InventoryEventRepository;
 import com.example.bil_projekt.Repository.RentalRepository;
 import com.example.bil_projekt.model.Customer;
 import com.example.bil_projekt.model.Car;
@@ -22,6 +23,10 @@ public class RentalService {
 
     @Autowired
     private CarRepository carRepo;
+
+    @Autowired
+    private InventoryEventRepository inventoryRepo;
+
 
     // ------ TEST SETTERS ------
     public void setCustomerRepo(CustomerRepository repo) {
@@ -49,15 +54,20 @@ public class RentalService {
     ) {
 
         Car car = carRepo.findByReg(regNum);
+        if (car == null)
+            throw new IllegalArgumentException("Bilen findes ikke");
+
         if (car.getStatus().equals("Udlejet")) {
             throw new IllegalStateException("Bilen er allerede udlejet");
         }
 
+        // KUNDE TJEK
         validateCustomer(customerId);
 
+        // DATOER
         LocalDate start = LocalDate.parse(startDateStr);
         LocalDate end = (endDateStr == null || endDateStr.isBlank())
-                ? null
+                ? start.plusMonths(5)
                 : LocalDate.parse(endDateStr);
 
         RentalAgreement r = new RentalAgreement();
@@ -68,9 +78,16 @@ public class RentalService {
         r.setFirst_payment_paid(firstPayment);
         r.setPickup_location(pickup);
 
+
+        // GEM I DB
         rentalRepo.createRental(r);
 
+        // OPDATER BIL STATUS
         carRepo.updateStatus(car.getCar_id(), "Udlejet");
+
+        // LOG STATUS ÆNDRING TIL LAGERHISTORIK
+        inventoryRepo.addEvent(car.getCar_id(), "Udlejet");
+
     }
 
     private void validateCustomer(int customerId) {

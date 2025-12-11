@@ -1,17 +1,21 @@
 package com.example.bil_projekt;
 
-import com.example.bil_projekt.model.RentalAgreement;
 import com.example.bil_projekt.Repository.CarRepository;
+import com.example.bil_projekt.Repository.CustomerRepository;
 import com.example.bil_projekt.Repository.RentalRepository;
+import com.example.bil_projekt.Service.RentalService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.time.LocalDate;
-
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 public class RentalTest {
+
+    @Autowired
+    private RentalService rentalService;
 
     @Autowired
     private CarRepository carRepo;
@@ -19,50 +23,54 @@ public class RentalTest {
     @Autowired
     private RentalRepository rentalRepo;
 
+    @Autowired
+    private CustomerRepository customerRepo;
+
     @Test
-    void testCreateRental() {
+    void testCreateRental_HappyFlow() {
 
         System.out.println("===== UC1 TEST STARTER =====");
 
-        // ---------------------------------------------
-        // 1. Find bil (skal være Ledig)
-        // ---------------------------------------------
-        var car = carRepo.findById(1);   // car_id = 1 fra dine inserts
+        // -----------------------------
+        // 1: Opret en test-kunde i DB
+        // -----------------------------
+        customerRepo.addCustomer(
+                500,
+                "Test Person",
+                "test@kea.dk",
+                "12345678",
+                "Testvej 1"
+        );
 
-        System.out.println("Fundet bil: " + car.getCar_id() +
-                " Status: " + car.getStatus());
+        // -----------------------------
+        // 2: Opret test-bil i DB
+        // -----------------------------
+        carRepo.addCar("TEST123", "Peugeot", "208", "Ledig");
 
-        if (car.getStatus().equals("Udlejet")) {
-            System.out.println("❌ Bilen er allerede udlejet");
-            return;
-        }
+        var car = carRepo.findByReg("TEST123");
 
-        // ---------------------------------------------
-        // 2. Lav en RentalAgreement (NY DATABASE = ID KRÆVES)
-        // ---------------------------------------------
-        RentalAgreement r = new RentalAgreement();
-        r.setRental_id(100); // DU SKAL SELV SÆTTE ID NU
-        r.setCar_id(car.getCar_id());
-        r.setCustomer_id(500); // test customer
-        r.setStart_date(LocalDate.now());
-        r.setEnd_date(LocalDate.now().plusMonths(3)); // kan IKKE være null
-        r.setFirst_payment_paid(true);
-        r.setPickup_location("Aalborg");
+        // -----------------------------
+        // 3: Kør createRental()
+        // -----------------------------
+        assertDoesNotThrow(() -> {
+            rentalService.createRental(
+                    "TEST123",
+                    500,
+                    "2025-01-01",
+                    "2025-05-01",
+                    true,
+                    "Aalborg"
+            );
+        });
 
-        // ---------------------------------------------
-        // 3. Gem aftalen
-        // ---------------------------------------------
-        rentalRepo.createRental(r);
-        System.out.println("✔ Aftale oprettet i RentalAgreement");
+        // -----------------------------
+        // 4: Tjek at bilstatus er opdateret
+        // -----------------------------
+        var updatedCar = carRepo.findByReg("TEST123");
 
-        // ---------------------------------------------
-        // 4. Opdater bil status
-        // ---------------------------------------------
-        carRepo.updateStatus(car.getCar_id(), "Udlejet");
-        System.out.println("✔ Bil sat til Udlejet");
+        assertEquals("Udlejet", updatedCar.getStatus());
 
+        System.out.println("✔ Bil status opdateret: " + updatedCar.getStatus());
         System.out.println("===== UC1 TEST FÆRDIG =====");
     }
 }
-
-

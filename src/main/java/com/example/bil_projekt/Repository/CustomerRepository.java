@@ -30,5 +30,11 @@ public class CustomerRepository {
         Integer count = jdbc.queryForObject(sql, Integer.class, id);
         return count != null && count > 0;
     }
+    // Bruges i RentalTest
+    public void addCustomer(int id, String name, String email, String phone, String address) {
+        String sql = "INSERT INTO Customer (customer_id, name, email, phone, address) VALUES (?, ?, ?, ?, ?)";
+        jdbc.update(sql, id, name, email, phone, address);
+    }
+
 }
 
