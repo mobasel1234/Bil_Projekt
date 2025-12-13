@@ -50,13 +50,13 @@ public class ReturnController {
         try {
             Car car = carRepo.findByReg(steelNumber);
             if (car == null) {
-                model.addAttribute("message", "❌ Bil blev ikke fundet");
+                model.addAttribute("message", " Bil blev ikke fundet");
                 return "returnView";
             }
 
             RentalAgreement agreement = rentalRepo.findActiveRental(car.getCar_id());
             if (agreement == null) {
-                model.addAttribute("message", "❌ Ingen aktiv lejeaftale fundet");
+                model.addAttribute("message", " Ingen aktiv lejeaftale fundet");
                 return "returnView";
             }
 

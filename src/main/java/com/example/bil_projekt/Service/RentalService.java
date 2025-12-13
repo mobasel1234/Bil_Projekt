@@ -44,6 +44,8 @@ public class RentalService {
 
 
 
+    // Opretter en lejeaftale for en bil og en eksisterende kunde
+
     public void createRental(
             String regNum,
             int customerId,
@@ -52,24 +54,29 @@ public class RentalService {
             boolean firstPayment,
             String pickup
     ) {
-
+        // Slår bilen op på stelnummer
         Car car = carRepo.findByReg(regNum);
         if (car == null)
             throw new IllegalArgumentException("Bilen findes ikke");
 
+
+        // Tjekker om bilen allerede er udlejet
         if (car.getStatus().equals("Udlejet")) {
             throw new IllegalStateException("Bilen er allerede udlejet");
         }
 
-        // KUNDE TJEK
+        // Validering at kunden findes og at data er gyldig
         validateCustomer(customerId);
 
-        // DATOER
+
+        // Konverterer datoer fra tekst til LocalDate
         LocalDate start = LocalDate.parse(startDateStr);
         LocalDate end = (endDateStr == null || endDateStr.isBlank())
                 ? start.plusMonths(5)
                 : LocalDate.parse(endDateStr);
 
+
+        // Opretter et RentalAgreement-objekt klar til at blive gemt
         RentalAgreement r = new RentalAgreement();
         r.setCar_id(car.getCar_id());
         r.setCustomer_id(customerId);
@@ -82,14 +89,15 @@ public class RentalService {
         // GEM I DB
         rentalRepo.createRental(r);
 
-        // OPDATER BIL STATUS
+        // Opdater bills status
         carRepo.updateStatus(car.getCar_id(), "Udlejet");
 
-        // LOG STATUS ÆNDRING TIL LAGERHISTORIK
+        // Status ændring i InventoryEvent
         inventoryRepo.addEvent(car.getCar_id(), "Udlejet");
 
     }
 
+    // Tjekker at kunden findes og at navn, email og telefon er gyldige
     private void validateCustomer(int customerId) {
         if (!customerRepo.exists(customerId)) {
             throw new IllegalArgumentException("Kunde findes ikke");

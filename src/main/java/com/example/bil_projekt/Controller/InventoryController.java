@@ -15,9 +15,12 @@ public class InventoryController {
     @Autowired
     private CarRepository carRepo;
 
+    // Viser lagerstatus: kun biler der er ledige til udlejning
     @GetMapping("/lagerstatus")
     public String showInventory(Model model) {
-        List<Car> cars = carRepo.findAll();
+
+        // Her vises kun 'Ledig'
+        List<Car> cars = carRepo.findAvailableCars();
         model.addAttribute("cars", cars);
         return "lagerstatus";
     }

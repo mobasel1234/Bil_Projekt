@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Bil Detaljer</title>
+    <link rel="stylesheet" th:href="@{/carDetails.css}">
+
+</head>
+<body>
+
+<h2>Bil Detaljer</h2>
+
+<p><strong>Car ID:</strong> <span th:text="${car.car_id}"></span></p>
+<p><strong>Stelnummer:</strong> <span th:text="${car.steelNumber}"></span></p>
+<p><strong>Brand:</strong> <span th:text="${car.brand}"></span></p>
+<p><strong>Model:</strong> <span th:text="${car.model}"></span></p>
+<p><strong>Trim:</strong> <span th:text="${car.trim_level}"></span></p>
+<p><strong>Status:</strong> <span th:text="${car.status}"></span></p>
+
+<hr>
+
+<h3>Kunde</h3>
+<p><strong>Navn:</strong> <span th:text="${car.customer_name}"></span></p>
+<p><strong>Email:</strong> <span th:text="${car.customer_email}"></span></p>
+<p><strong>Telefon:</strong> <span th:text="${car.customer_phone}"></span></p>
+
+<hr>
+
+<h3>Lejeaftale</h3>
+<p><strong>Startdato:</strong> <span th:text="${car.start_date}"></span></p>
+<p><strong>Slutdato:</strong> <span th:text="${car.end_date}"></span></p>
+<p><strong>Afhentningssted:</strong> <span th:text="${car.pickup_location}"></span></p>
+
+<hr>
+
+<h3>Mangler / Tidligere Skader</h3>
+<textarea rows="6" cols="60"
+          placeholder="Skriv mangler, tidligere skader eller interne noter her..."></textarea>
+
+<br><br>
+
+<a href="/bilstatus">Tilbage</a>
+
+</body>
+</html>
