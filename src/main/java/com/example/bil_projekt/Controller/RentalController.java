@@ -26,13 +26,10 @@ public class RentalController {
     @PostMapping("/rental/create")
     public String createRental(
             @RequestParam String registration_number,
-
-
             @RequestParam String name,
             @RequestParam String email,
             @RequestParam String phone,
             @RequestParam String address,
-
             @RequestParam String start_date,
             @RequestParam(required = false) String end_date,
             @RequestParam(defaultValue = "false") boolean first_payment_paid,
@@ -46,18 +43,21 @@ public class RentalController {
             // Opret selve lejeaftale med det nye ID
             rentalService.createRental(
                     registration_number,
-                    customerId,
+                    name,
+                    email,
+                    phone,
+                    address,
                     start_date,
                     end_date,
                     first_payment_paid,
                     pickup_location
             );
 
-            model.addAttribute("message", "✔ Lejeaftale oprettet! Kunde-ID: " + customerId);
+            model.addAttribute("message", "Lejeaftale oprettet! Kunde-ID: " + customerId);
 
         } catch (Exception e) {
             //viser eventuelle fejl fra validering eller database
-            model.addAttribute("message", "❌ Fejl: " + e.getMessage());
+            model.addAttribute("message", " Fejl: " + e.getMessage());
         }
 
 

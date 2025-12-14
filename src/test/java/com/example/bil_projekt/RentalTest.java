@@ -1,8 +1,5 @@
 package com.example.bil_projekt;
-
 import com.example.bil_projekt.Repository.CarRepository;
-import com.example.bil_projekt.Repository.CustomerRepository;
-import com.example.bil_projekt.Repository.RentalRepository;
 import com.example.bil_projekt.Service.RentalService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 @SpringBootTest
 public class RentalTest {
@@ -20,42 +18,20 @@ public class RentalTest {
     @Autowired
     private CarRepository carRepo;
 
-    @Autowired
-    private RentalRepository rentalRepo;
-
-    @Autowired
-    private CustomerRepository customerRepo;
-
     @Test
     void testCreateRental_HappyFlow() {
 
-        System.out.println("===== UC1 TEST STARTER =====");
-
-        // -----------------------------
-        // 1: Opret en test-kunde i DB
-        // -----------------------------
-        customerRepo.addCustomer(
-                500,
-                "Test Person",
-                "test@kea.dk",
-                "12345678",
-                "Testvej 1"
-        );
-
-        // -----------------------------
-        // 2: Opret test-bil i DB
-        // -----------------------------
+        // 1️⃣ Opret test-bil
         carRepo.addCar("TEST123", "Peugeot", "208", "Ledig");
 
-        var car = carRepo.findByReg("TEST123");
-
-        // -----------------------------
-        // 3: Kør createRental()
-        // -----------------------------
+        // 2️⃣ Kør createRental (kunden oprettes AUTOMATISK i service)
         assertDoesNotThrow(() -> {
             rentalService.createRental(
                     "TEST123",
-                    500,
+                    "Test Person",
+                    "test@kea.dk",
+                    "12345678",
+                    "Testvej 1",
                     "2025-01-01",
                     "2025-05-01",
                     true,
@@ -63,14 +39,8 @@ public class RentalTest {
             );
         });
 
-        // -----------------------------
-        // 4: Tjek at bilstatus er opdateret
-        // -----------------------------
+        // Tjek at bilstatus er opdateret
         var updatedCar = carRepo.findByReg("TEST123");
-
         assertEquals("Udlejet", updatedCar.getStatus());
-
-        System.out.println("✔ Bil status opdateret: " + updatedCar.getStatus());
-        System.out.println("===== UC1 TEST FÆRDIG =====");
     }
 }

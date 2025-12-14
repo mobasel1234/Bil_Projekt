@@ -24,6 +24,18 @@ public class RentalRepository {
 
 
 
+
+    // Finder seneste return-inspection (bruges til skaderegistrering)
+    public int findLatestInspectionId() {
+        String sql = """
+        SELECT inspection_id
+        FROM ReturnInspection
+        ORDER BY inspection_id DESC
+        LIMIT 1
+    """;
+        return jdbc.queryForObject(sql, Integer.class);
+    }
+
     // Opret en ny lejeaftale
     public void createRental(RentalAgreement r) {
         String sql = """

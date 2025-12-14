@@ -16,28 +16,33 @@ public class DamageController {
 
     // Vis formularen
     @GetMapping("/damages/register")
-    public String showDamageForm() {
+    public String showDamageForm(
+            @RequestParam(required = false) Integer inspectionId,
+            Model model
+    ) {
+        model.addAttribute("inspectionId", inspectionId);
         return "damageView";
     }
+
 
     // Håndter formularen
     @PostMapping("/damages/register")
     public String registerDamage(
-            @RequestParam int inspection_id,
+            @RequestParam int inspectionId,
             @RequestParam String description,
             @RequestParam String damage_type,
             @RequestParam double severity,
             Model model
     ) {
         try {
-            damageService.registerDamage(inspection_id, description, damage_type, severity);
-            model.addAttribute("message", "✔ Skade registreret og pris beregnet!");
+            damageService.registerDamage(inspectionId, description, damage_type, severity);
+            model.addAttribute("message", "Skade registreret");
         } catch (Exception e) {
-            model.addAttribute("message", "❌ Fejl: " + e.getMessage());
+            model.addAttribute("message", "Fejl: " + e.getMessage());
         }
-
         return "damageView";
     }
+
 }
 
 

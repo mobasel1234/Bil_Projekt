@@ -26,13 +26,13 @@ public class ReturnController {
 
     private ReturnRegistration returnReg = new ReturnRegistration();
 
-    // ----------- NYT -----------
+
     // Dette gør at /return også virker
     @GetMapping("/return")
     public String directReturnPage() {
         return "returnView";
     }
-    // ----------------------------
+
 
     // Vis formular
     @GetMapping("/register-return")
@@ -73,7 +73,7 @@ public class ReturnController {
             model.addAttribute("message", "❌ Fejl: " + e.getMessage());
         }
 
-        return "returnView";
+        return "redirect:/damages/register";
     }
 }
 
