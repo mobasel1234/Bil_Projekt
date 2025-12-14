@@ -30,15 +30,10 @@
 <p><strong>Slutdato:</strong> <span th:text="${car.end_date}"></span></p>
 <p><strong>Afhentningssted:</strong> <span th:text="${car.pickup_location}"></span></p>
 
-<hr>
-
-<h3>Mangler / Tidligere Skader</h3>
-<textarea rows="6" cols="60"
-          placeholder="Skriv mangler, tidligere skader eller interne noter her..."></textarea>
 
 <br><br>
 
-<a href="/bilstatus">Tilbage</a>
+<a th:href="@{/carStatus}">Tilbage</a>
 
 </body>
 </html>

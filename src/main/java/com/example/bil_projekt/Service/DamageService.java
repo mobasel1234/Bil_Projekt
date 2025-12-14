@@ -2,9 +2,11 @@ package com.example.bil_projekt.Service;
 
 import com.example.bil_projekt.model.DamageMatrix;
 import com.example.bil_projekt.model.DamageReport;
-import com.example.bil_projekt.Repository.DamageMatrixRepository;
-import com.example.bil_projekt.Repository.DamageRepository;
-import com.example.bil_projekt.Repository.CarRepository;
+import com.example.bil_projekt.Repository.damageAndKPI.DamageMatrixRepository;
+import com.example.bil_projekt.Repository.damageAndKPI.DamageRepository;
+import com.example.bil_projekt.Repository.car.CarRepository;
+import com.example.bil_projekt.Repository.car.RentalRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,22 +20,32 @@ public class DamageService {
     private DamageMatrixRepository matrixRepo;
 
     @Autowired
-    private CarRepository carRepo;   // ✅ TILFØJET
+    private CarRepository carRepo;
+
+
+
 
     public double calculatePrice(String type, double severity) {
         DamageMatrix m = matrixRepo.findByType(type);
         return m.getPrice() * severity;
     }
 
-    public void registerDamage(int inspectionId,
-                               String description,
-                               String type,
-                               double severity) {
+    public void registerDamage(
+            int inspectionId,
+            String description,
+            String type,
+            double severity
+    ) {
 
-        // 1. Beregn pris
+
+
+
+
+        // FINDER CAR_ID VIA INSPECTION
+        int carId = carRepo.findCarIdByInspectionId(inspectionId);
+
         double price = calculatePrice(type, severity);
 
-        // 2. Opret skaderapport
         DamageReport r = new DamageReport();
         r.setInspection_id(inspectionId);
         r.setDescription(description);
@@ -43,13 +55,13 @@ public class DamageService {
 
         damageRepo.createDamageReport(r);
 
-        // ✅ 3. OPDATER BILSTATUS EFTER SKADE
-        int carId = carRepo.findCarIdByInspectionId(inspectionId);
+
 
         if (price == 0) {
-            carRepo.updateStatus(carId, "Klar til udlejning");
+            carRepo.updateStatus(inspectionId, "Klar til udlejning");
         } else {
-            carRepo.updateStatus(carId, "På værksted");
+            carRepo.updateStatus(inspectionId, "På værksted");
         }
     }
 }
+

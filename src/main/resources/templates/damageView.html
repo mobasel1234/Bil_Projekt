@@ -4,7 +4,6 @@
   <title>Registrer skade</title>
   <meta charset="UTF-8"/>
 
-  <!-- LINK TIL DIT CSS -->
   <link rel="stylesheet" th:href="@{/damageView.css}">
 </head>
 
@@ -12,16 +11,13 @@
 
 <div class="damage-page">
 
-  <!-- HEADER -->
   <div class="damage-page-header">
     <h1 class="damage-page-title">Registrer skade</h1>
     <p class="damage-page-subtitle">Intern skadesregistrering</p>
   </div>
 
-  <!-- LAYOUT -->
   <div class="damage-layout">
 
-    <!-- VENSTRE SIDE : FORM -->
     <div class="card">
       <div class="card-header">
         <div>
@@ -34,23 +30,15 @@
             th:action="@{/damages/register}"
             method="post">
 
-        <!-- Inspection ID -->
-        <div class="form-group">
-          <label class="form-label">Inspection ID <span class="required">*</span></label>
-          <input class="form-control"
-                 type="number"
-                 name="inspection_id"
-                 placeholder="Indtast inspection ID"
-                 required>
-        </div>
+        <!-- ✅ NØDVENDIGT: send inspectionId med -->
+        <input type="hidden" name="inspectionId" th:value="${inspectionId}">
 
         <!-- Description -->
         <div class="form-group">
           <label class="form-label">Beskrivelse</label>
           <textarea class="form-textarea"
                     name="description"
-                    placeholder="Kort beskrivelse af skaden..."
-          ></textarea>
+                    placeholder="Kort beskrivelse af skaden..."></textarea>
         </div>
 
         <!-- Damage Type -->
@@ -73,23 +61,19 @@
                  name="severity"
                  min="1"
                  max="10"
-                 placeholder="Vælg en værdi mellem 1-10"
                  required>
         </div>
 
-        <!-- BUTTONS -->
         <div class="btn-row">
           <button type="submit" class="btn btn-primary">Registrer skade</button>
         </div>
 
-        <!-- FEEDBACK -->
         <div th:if="${message}" class="feedback feedback-success" th:text="${message}"></div>
         <div th:if="${error}" class="feedback feedback-error" th:text="${error}"></div>
 
       </form>
     </div>
 
-    <!-- HØJRE SIDE: KAN bruges til historik senere -->
     <div class="card">
       <div class="card-header">
         <div>
@@ -99,7 +83,7 @@
       </div>
 
       <p class="text-muted">
-        Her kan du senere vise historik over skader på bilen baseret på inspection_id.
+        Her kan du senere vise historik over skader på bilen.
       </p>
     </div>
 

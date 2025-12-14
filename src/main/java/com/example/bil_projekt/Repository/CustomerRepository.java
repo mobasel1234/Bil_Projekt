@@ -28,10 +28,16 @@ public class CustomerRepository {
     }
 
     public int createCustomer(String name, String email, String phone, String address) {
-        String sql = "INSERT INTO Customer (name, email, phone, address) VALUES (?, ?, ?, ?)";
+        String sql = """
+        INSERT INTO Customer (name, email, phone, address)
+        VALUES (?, ?, ?, ?)
+    """;
+
         jdbc.update(sql, name, email, phone, address);
+
         return jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
     }
+
 
 
     public boolean exists(int id) {

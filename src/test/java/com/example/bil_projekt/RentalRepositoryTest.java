@@ -1,6 +1,6 @@
 package com.example.bil_projekt;
 
-import com.example.bil_projekt.Repository.RentalRepository;
+import com.example.bil_projekt.Repository.car.RentalRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.jdbc.core.JdbcTemplate;
