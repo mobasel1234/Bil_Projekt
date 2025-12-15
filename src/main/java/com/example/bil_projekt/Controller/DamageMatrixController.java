@@ -1,6 +1,6 @@
-package com.example.bil_projekt.Controller.DamageAndKPI;
+package com.example.bil_projekt.Controller;
 
-import com.example.bil_projekt.Repository.damageAndKPI.DamageMatrixRepository;
+import com.example.bil_projekt.Repository.DamageMatrixRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

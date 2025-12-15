@@ -1,7 +1,7 @@
-package com.example.bil_projekt.Controller.Rental;
+package com.example.bil_projekt.Controller;
 
 import com.example.bil_projekt.model.Car;
-import com.example.bil_projekt.Repository.car.CarRepository;
+import com.example.bil_projekt.Repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

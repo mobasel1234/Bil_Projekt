@@ -1,4 +1,4 @@
-package com.example.bil_projekt.Repository.car;
+package com.example.bil_projekt.Repository;
 
 import com.example.bil_projekt.model.Car;
 import org.springframework.jdbc.core.RowMapper;

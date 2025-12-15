@@ -1,4 +1,4 @@
-package com.example.bil_projekt.Controller.DamageAndKPI;
+package com.example.bil_projekt.Controller;
 
 import com.example.bil_projekt.Service.KpiService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.example.bil_projekt.Repository.damageAndKPI;
+package com.example.bil_projekt.Repository;
 
 import com.example.bil_projekt.model.DamageReport;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
 package com.example.bil_projekt;
 
 import com.example.bil_projekt.Service.CarService;
-import com.example.bil_projekt.Repository.car.RentalRepository;
+import com.example.bil_projekt.Repository.RentalRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
