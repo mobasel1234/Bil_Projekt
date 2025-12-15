@@ -62,5 +62,24 @@ public class DamageService {
             carRepo.updateStatus(inspectionId, "På værksted");
         }
     }
+
+    public void applyDamageMatrix(int inspectionId, int matrixId) {
+
+        // find matrix
+        DamageMatrix matrix = matrixRepo.findById(matrixId);
+
+        // find bil via inspection
+        int carId = carRepo.findCarIdByInspectionId(inspectionId);
+
+        // opdater skade-pris (du har allerede en DamageReport for inspection)
+        damageRepo.updateCostByInspection(
+                inspectionId,
+                matrix.getPrice()
+        );
+
+        // sæt bilstatus
+        carRepo.updateStatus(carId, "Skadet");
+    }
+
 }
 

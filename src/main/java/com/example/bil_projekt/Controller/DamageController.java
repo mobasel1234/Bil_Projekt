@@ -40,7 +40,8 @@ public class DamageController {
         } catch (Exception e) {
             model.addAttribute("message", "Fejl: " + e.getMessage());
         }
-        return "damageView";
+        return "redirect:/damage-matrix?inspectionId=" + inspectionId;
+
     }
 
 }

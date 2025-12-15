@@ -26,4 +26,14 @@ public class DamageRepository {
                 report.getDamage_type()
         );
     }
+    public void updateCostByInspection(int inspectionId, double price) {
+        String sql = """
+        UPDATE DamageReport
+        SET cost_estimate = ?
+        WHERE inspection_id = ?
+    """;
+        jdbc.update(sql, price, inspectionId);
+    }
+
+
 }

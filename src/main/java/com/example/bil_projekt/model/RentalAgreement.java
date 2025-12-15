@@ -12,12 +12,15 @@ public class RentalAgreement {
     private LocalDate end_date;
     private boolean first_payment_paid;
     private String pickup_location;
+    private int monthly_price;
 
     public RentalAgreement() {}
 
+
+
     public RentalAgreement(int rental_id, int car_id, int customer_id,
                            LocalDate start_date, LocalDate end_date,
-                           boolean first_payment_paid, String pickup_location) {
+                           boolean first_payment_paid, String pickup_location, int monthly_price) {
         this.rental_id = rental_id;
         this.car_id = car_id;
         this.customer_id = customer_id;
@@ -25,6 +28,7 @@ public class RentalAgreement {
         this.end_date = end_date;
         this.first_payment_paid = first_payment_paid;
         this.pickup_location = pickup_location;
+        this.monthly_price = monthly_price;
     }
 
     public int getRental_id() { return rental_id; }
@@ -47,5 +51,13 @@ public class RentalAgreement {
 
     public String getPickup_location() { return pickup_location; }
     public void setPickup_location(String pickup_location) { this.pickup_location = pickup_location; }
+
+    public int getMonthly_price() {
+        return monthly_price;
+    }
+
+    public void setMonthly_price(int monthly_price) {
+        this.monthly_price = monthly_price;
+    }
 }
 

@@ -3,7 +3,6 @@
 <head>
     <title>Bil Detaljer</title>
     <link rel="stylesheet" th:href="@{/carDetails.css}">
-
 </head>
 <body>
 
@@ -30,6 +29,22 @@
 <p><strong>Slutdato:</strong> <span th:text="${car.end_date}"></span></p>
 <p><strong>Afhentningssted:</strong> <span th:text="${car.pickup_location}"></span></p>
 
+<hr>
+
+<h3>Skader</h3>
+
+<!-- Hvis der IKKE er nogen skader -->
+<p th:if="${car.damage_type == null}">
+    Ingen registrerede skader.
+</p>
+
+<!-- Hvis der ER skader -->
+<div th:if="${car.damage_type != null}">
+    <p><strong>Skadetype:</strong> <span th:text="${car.damage_type}"></span></p>
+    <p><strong>Beskrivelse:</strong> <span th:text="${car.damage_description}"></span></p>
+    <p><strong>Severity:</strong> <span th:text="${car.severity}"></span></p>
+    <p><strong>Pris:</strong> <span th:text="${car.cost_estimate}"></span> kr</p>
+</div>
 
 <br><br>
 

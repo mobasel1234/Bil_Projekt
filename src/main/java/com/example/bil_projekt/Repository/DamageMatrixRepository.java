@@ -24,5 +24,11 @@ public class DamageMatrixRepository {
         return jdbc.queryForList(sql);
     }
 
+    public DamageMatrix findById(int id) {
+        String sql = "SELECT * FROM DamageMatrix WHERE matrix_id = ?";
+        return jdbc.queryForObject(sql, new BeanPropertyRowMapper<>(DamageMatrix.class), id);
+    }
+
+
 }
 
