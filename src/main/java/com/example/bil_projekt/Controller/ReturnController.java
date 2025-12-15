@@ -3,8 +3,8 @@ package com.example.bil_projekt.Controller;
 import com.example.bil_projekt.model.Car;
 import com.example.bil_projekt.model.RentalAgreement;
 import com.example.bil_projekt.model.ReturnRegistration;
-import com.example.bil_projekt.Repository.CarRepository;
-import com.example.bil_projekt.Repository.RentalRepository;
+import com.example.bil_projekt.Repository.car.CarRepository;
+import com.example.bil_projekt.Repository.car.RentalRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

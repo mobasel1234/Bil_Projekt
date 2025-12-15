@@ -1,4 +1,4 @@
-package com.example.bil_projekt.Controller;
+package com.example.bil_projekt.Controller.Rental;
 
 import com.example.bil_projekt.Service.RentalService;
 import com.example.bil_projekt.Repository.CustomerRepository;

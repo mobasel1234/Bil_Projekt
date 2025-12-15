@@ -1,4 +1,4 @@
-package com.example.bil_projekt.Controller;
+package com.example.bil_projekt.Controller.Rental;
 
 import com.example.bil_projekt.Service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;

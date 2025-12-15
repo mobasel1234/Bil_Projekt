@@ -1,7 +1,7 @@
 package com.example.bil_projekt;
 
-import com.example.bil_projekt.Repository.CarRepository;
-import com.example.bil_projekt.Repository.RentalRepository;
+import com.example.bil_projekt.Repository.car.CarRepository;
+import com.example.bil_projekt.Repository.car.RentalRepository;
 import com.example.bil_projekt.Service.KpiService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
