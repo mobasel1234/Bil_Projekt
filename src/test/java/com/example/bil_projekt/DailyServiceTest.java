@@ -16,22 +16,24 @@ public class DailyServiceTest {
     @Autowired
     private DailyService dailyService;
 
+    // ✅ Test 1: Metoden må ikke crashe og skal returnere en liste
     @Test
     void testGetReturnsTodayDoesNotCrash() {
         List<RentalAgreement> result = dailyService.getReturnsToday();
 
-        // Vi tjekker at metoden returnerer en liste
-        assertNotNull(result);
+        assertNotNull(result); // altid en liste (evt. tom)
     }
 
+    // ✅ Test 2: Hvis der er returneringer i dag, skal data være gyldig
     @Test
     void testReturnsTodayLogic() {
         List<RentalAgreement> result = dailyService.getReturnsToday();
 
-        // Hvis der ER data i DB for i dag → skal den kunne findes
-        for (RentalAgreement r : result) {
-            assertNotNull(r.getRental_id());
-            assertNotNull(r.getCar_id());
+        if (!result.isEmpty()) {
+            for (RentalAgreement r : result) {
+                assertTrue(r.getRental_id() > 0);
+                assertTrue(r.getCar_id() > 0);
+            }
         }
     }
 }

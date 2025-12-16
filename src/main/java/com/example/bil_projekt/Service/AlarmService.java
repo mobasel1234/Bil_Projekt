@@ -2,6 +2,7 @@ package com.example.bil_projekt.Service;
 
 import com.example.bil_projekt.Repository.AlarmRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,5 +41,10 @@ public class AlarmService {
     public List<Map<String, Object>> getAllActiveAlarms() {
         return alarmRepo.getAllActiveAlarms();
     }
+    @Scheduled(fixedRate = 1000 * 60 * 60) // hver time
+    public void runAutomaticAlarmCheck() {
+        checkAllAlarms();
+    }
+
 
 }
