@@ -148,7 +148,7 @@ public class RentalRepository {
             cust.email AS customer_email,
             cust.phone AS customer_phone,
 
-            -- 🔴 SKADEINFO
+            -- SKADEINFO
             d.description AS damage_description,
             d.damage_type,
             d.severity,
@@ -158,7 +158,7 @@ public class RentalRepository {
         JOIN RentalAgreement r ON c.car_id = r.car_id
         JOIN Customer cust ON cust.customer_id = r.customer_id
 
-        -- 🔴 KOBLING TIL SKADER
+        -- KOBLING TIL SKADER
         LEFT JOIN ReturnInspection ri ON ri.car_id = c.car_id
         LEFT JOIN DamageReport d ON d.inspection_id = ri.inspection_id
 
