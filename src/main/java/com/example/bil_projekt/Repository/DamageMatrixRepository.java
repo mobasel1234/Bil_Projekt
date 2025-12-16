@@ -15,10 +15,23 @@ public class DamageMatrixRepository {
     @Autowired
     private JdbcTemplate jdbc;
 
+
     public DamageMatrix findByType(String type) {
         String sql = "SELECT * FROM DamageMatrix WHERE damage_type = ?";
-        return jdbc.queryForObject(sql, new BeanPropertyRowMapper<>(DamageMatrix.class), type);
+
+        List<DamageMatrix> result = jdbc.query(
+                sql,
+                new BeanPropertyRowMapper<>(DamageMatrix.class),
+                type
+        );
+
+        if (result.isEmpty()) {
+            return null; // 👈 VIGTIGT
+        }
+
+        return result.get(0);
     }
+
     public List<Map<String, Object>> findAll() {
         String sql = "SELECT * FROM DamageMatrix";
         return jdbc.queryForList(sql);

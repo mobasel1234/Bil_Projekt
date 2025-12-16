@@ -2,7 +2,6 @@ package com.example.bil_projekt.Controller;
 
 import com.example.bil_projekt.model.Car;
 import com.example.bil_projekt.model.RentalAgreement;
-import com.example.bil_projekt.model.ReturnRegistration;
 import com.example.bil_projekt.Repository.CarRepository;
 import com.example.bil_projekt.Repository.RentalRepository;
 
@@ -24,23 +23,19 @@ public class ReturnController {
     @Autowired
     private RentalRepository rentalRepo;
 
-    private ReturnRegistration returnReg = new ReturnRegistration();
-
-
-    // Dette gør at /return også virker
+    // gør at /return også virker
     @GetMapping("/return")
     public String directReturnPage() {
         return "returnView";
     }
 
-
-    // Vis formular
+    // vis formular
     @GetMapping("/register-return")
     public String showReturnForm() {
         return "returnView";
     }
 
-    // Håndter returnering
+    // håndter returnering
     @PostMapping("/register-return")
     public String registerReturn(
             @RequestParam String steelNumber,
@@ -48,32 +43,39 @@ public class ReturnController {
             Model model
     ) {
         try {
+            // find bil
             Car car = carRepo.findByReg(steelNumber);
             if (car == null) {
-                model.addAttribute("message", " Bil blev ikke fundet");
+                model.addAttribute("message", "Bil blev ikke fundet");
                 return "returnView";
             }
 
+            // find aktiv lejeaftale
             RentalAgreement agreement = rentalRepo.findActiveRental(car.getCar_id());
             if (agreement == null) {
-                model.addAttribute("message", " Ingen aktiv lejeaftale fundet");
+                model.addAttribute("message", "Ingen aktiv lejeaftale fundet");
                 return "returnView";
             }
 
+            // parse dato
             LocalDate date = LocalDate.parse(return_date);
 
-            returnReg.registerReturn(car, agreement, date);
+            // OPRET RETURN INSPECTION  ⭐ VIGTIG ⭐
+            int inspectionId = rentalRepo.createReturnInspection(
+                    car.getCar_id(),
+                    agreement.getRental_id(),
+                    date
+            );
 
+            // opdater lejeaftale slutdato
             rentalRepo.updateEndDate(agreement.getRental_id(), date);
-            carRepo.updateStatus(car.getCar_id(), car.getStatus());
 
-            model.addAttribute("message", "✔ Bilen er returneret!");
+            // videresend til skade-registrering MED inspectionId
+            return "redirect:/damages/register?inspectionId=" + inspectionId;
 
         } catch (Exception e) {
             model.addAttribute("message", "❌ Fejl: " + e.getMessage());
+            return "returnView";
         }
-
-        return "redirect:/damages/register";
     }
 }
-

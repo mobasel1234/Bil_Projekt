@@ -21,14 +21,24 @@ public class DamageService {
     @Autowired
     private CarRepository carRepo;
 
-
-
-
+    // =======================
+    // BEREGN PRIS
+    // =======================
     public double calculatePrice(String type, double severity) {
+
         DamageMatrix m = matrixRepo.findByType(type);
+        if (m == null) {
+            throw new IllegalArgumentException(
+                    "Ingen damage matrix fundet for type: " + type
+            );
+        }
+
         return m.getPrice() * severity;
     }
 
+    // =======================
+    // REGISTRER SKADE
+    // =======================
     public void registerDamage(
             int inspectionId,
             String description,
@@ -36,11 +46,6 @@ public class DamageService {
             double severity
     ) {
 
-
-
-
-
-        // FINDER CAR_ID VIA INSPECTION
         int carId = carRepo.findCarIdByInspectionId(inspectionId);
 
         double price = calculatePrice(type, severity);
@@ -55,31 +60,27 @@ public class DamageService {
         damageRepo.createDamageReport(r);
 
 
-
         if (price == 0) {
-            carRepo.updateStatus(inspectionId, "Klar til udlejning");
+            carRepo.updateStatus(carId, "Klar til udlejning");
         } else {
-            carRepo.updateStatus(inspectionId, "På værksted");
+            carRepo.updateStatus(carId, "På værksted");
         }
     }
 
+    // =======================
+    // APPLY DAMAGE MATRIX
+    // =======================
     public void applyDamageMatrix(int inspectionId, int matrixId) {
 
-        // find matrix
         DamageMatrix matrix = matrixRepo.findById(matrixId);
 
-        // find bil via inspection
         int carId = carRepo.findCarIdByInspectionId(inspectionId);
 
-        // opdater skade-pris (du har allerede en DamageReport for inspection)
         damageRepo.updateCostByInspection(
                 inspectionId,
                 matrix.getPrice()
         );
 
-        // sæt bilstatus
         carRepo.updateStatus(carId, "Skadet");
     }
-
 }
-

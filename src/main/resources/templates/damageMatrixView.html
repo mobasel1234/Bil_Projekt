@@ -1,14 +1,29 @@
-<form method="post" action="/damage-matrix/apply">
+<div class="layout">
 
-    <input type="hidden" name="inspectionId" th:value="${inspectionId}">
+    <!-- VENSTRE: vælg matrix -->
+    <form method="post" action="/damage-matrix/apply">
 
-    <select name="matrixId">
-        <option th:each="m : ${matrix}"
-                th:value="${m.matrix_id}"
-                th:text="${m.damage_type + ' - ' + m.price + ' kr'}">
-        </option>
-    </select>
+        <input type="hidden" name="inspectionId" th:value="${inspectionId}">
 
-    <button type="submit">Beregn pris</button>
-</form>
+        <h3>Vælg skadematrix</h3>
 
+        <select name="matrixId">
+            <option th:each="m : ${matrix}"
+                    th:value="${m.matrix_id}"
+                    th:text="${m.damage_type + ' - ' + m.price + ' kr'}">
+            </option>
+        </select>
+
+        <button type="submit">Beregn pris</button>
+    </form>
+
+    <!-- HØJRE: vis skade -->
+    <div class="damage-info">
+        <h3>Registreret skade</h3>
+
+        <p><strong>Type:</strong> <span th:text="${damage.damage_type}"></span></p>
+        <p><strong>Beskrivelse:</strong> <span th:text="${damage.description}"></span></p>
+        <p><strong>Severity:</strong> <span th:text="${damage.severity}"></span></p>
+    </div>
+
+</div>

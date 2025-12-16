@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Map;
+
 @Repository
 public class DamageRepository {
 
@@ -35,5 +38,40 @@ public class DamageRepository {
         jdbc.update(sql, price, inspectionId);
     }
 
+    public List<Map<String, Object>> findDamagesForCar(int carId) {
+
+        String sql = """
+        SELECT
+            dr.damage_type,
+            dr.description,
+            dr.severity,
+            dr.cost_estimate
+        FROM DamageReport dr
+        JOIN ReturnInspection ri ON dr.inspection_id = ri.inspection_id
+        WHERE ri.car_id = ?
+    """;
+
+        return jdbc.queryForList(sql, carId);
+    }
+
+
+
+
+    public Map<String, Object> findByInspectionId(int inspectionId) {
+
+        String sql = """
+        SELECT
+            damage_id,
+            description,
+            severity,
+            cost_estimate,
+            damage_type
+        FROM DamageReport
+        WHERE inspection_id = ?
+        LIMIT 1
+    """;
+
+        return jdbc.queryForMap(sql, inspectionId);
+    }
 
 }

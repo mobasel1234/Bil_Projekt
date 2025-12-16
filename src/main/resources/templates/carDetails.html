@@ -50,5 +50,24 @@
 
 <a th:href="@{/carStatus}">Tilbage</a>
 
+<hr>
+<h3>Skader & Pris</h3>
+
+<table>
+    <tr>
+        <th>Type</th>
+        <th>Beskrivelse</th>
+        <th>Severity</th>
+        <th>Pris</th>
+    </tr>
+
+    <tr th:each="d : ${damages}">
+        <td th:text="${d.damage_type}"></td>
+        <td th:text="${d.description}"></td>
+        <td th:text="${d.severity}"></td>
+        <td th:text="${d.cost_estimate} + ' kr'"></td>
+    </tr>
+</table>
+
 </body>
 </html>

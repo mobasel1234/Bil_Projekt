@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -230,6 +231,18 @@ public class RentalRepository {
         Double result = jdbc.queryForObject(sql, Double.class);
         return result != null ? result : 0.0;
     }
+
+    public int createReturnInspection(int carId, int rentalId, LocalDate date) {
+        String sql = """
+        INSERT INTO ReturnInspection (car_id, rental_id, return_date)
+        VALUES (?, ?, ?)
+    """;
+
+        jdbc.update(sql, carId, rentalId, date);
+
+        return jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
+    }
+
 
 
 

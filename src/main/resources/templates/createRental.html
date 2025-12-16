@@ -16,7 +16,7 @@
   <label>Registreringsnummer (VIN):</label>
   <input type="text" name="registration_number" required><br><br>
 
-  <!-- kunden skal IKKE skrive ID, systemet opretter ID AUTOMATISK -->
+  <!-- systemet opretter ID AUTOMATISK -->
   <label>Kundens Navn:</label>
   <input type="text" name="name" required><br><br>
 
@@ -46,7 +46,8 @@
 </form>
 
 <p th:text="${message}"></p>
-<!-- ✅ TILBAGE TIL DASHBOARD -->
+
+
 <div class="back-link">
   <a th:href="@{/dashBoard}">← Tilbage til dashboard</a>
 </div>

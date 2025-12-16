@@ -1,5 +1,6 @@
 package com.example.bil_projekt.Controller;
 
+import com.example.bil_projekt.Repository.DamageRepository;
 import com.example.bil_projekt.Repository.RentalRepository;
 import com.example.bil_projekt.Repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ public class CarController {
     @Autowired
     private RentalRepository rentalRepo;
 
+    @Autowired
+    private DamageRepository damageRepo;
+
     // Viser bilstatus, liste over alle biler der er udlejet lige nu
     @GetMapping("/carStatus")
     public String showRentedCars(Model model) {
@@ -27,6 +31,7 @@ public class CarController {
     @GetMapping("/carStatus/{carId}")
     public String showCarDetails(@PathVariable int carId, Model model) {
         model.addAttribute("car", rentalRepo.findCarDetails(carId));
+        model.addAttribute("damages", damageRepo.findDamagesForCar(carId));
         return "carDetails";
     }
 

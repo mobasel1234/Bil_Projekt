@@ -28,21 +28,21 @@ public class DamageController {
     // Håndter formularen
     @PostMapping("/damages/register")
     public String registerDamage(
-            @RequestParam int inspectionId,
+            @RequestParam(required = false) Integer inspectionId,
             @RequestParam String description,
             @RequestParam String damage_type,
             @RequestParam double severity,
             Model model
     ) {
-        try {
-            damageService.registerDamage(inspectionId, description, damage_type, severity);
-            model.addAttribute("message", "Skade registreret");
-        } catch (Exception e) {
-            model.addAttribute("message", "Fejl: " + e.getMessage());
+        if (inspectionId == null) {
+            model.addAttribute("error", "Du skal registrere en returnering først");
+            return "damageView";
         }
-        return "redirect:/damage-matrix?inspectionId=" + inspectionId;
 
+        damageService.registerDamage(inspectionId, description, damage_type, severity);
+        return "redirect:/damage-matrix?inspectionId=" + inspectionId;
     }
+
 
 }
 
