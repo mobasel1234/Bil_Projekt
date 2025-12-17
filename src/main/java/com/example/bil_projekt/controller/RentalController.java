@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -32,7 +33,7 @@ public class RentalController {
     }
 
     @GetMapping("/rentals/details")
-    public String rentalDetails(@RequestParam String steelNumber, Model model) {
+    public String rentalDetails(@RequestParam(value = "steelNumber", required = false)  String steelNumber, Model model) {
         // Vi viser kun detaljer for en aktiv lejeaftale (JOIN på car + rental + customer).
         var details = rentalService.getRentalDetails(steelNumber);
         model.addAttribute("details", details);

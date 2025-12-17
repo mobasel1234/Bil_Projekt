@@ -111,7 +111,6 @@ public class JdbcRentalRepository implements RentalRepository {
                     JOIN RentalAgreement r ON c.car_id = r.car_id
                     JOIN Customer cu ON r.customer_id = cu.customer_id
                     WHERE c.steelNumber = ?
-                      AND r.end_date IS NULL
                 """;
 
         return jdbc.queryForObject(sql, (rs, rowNum) -> {

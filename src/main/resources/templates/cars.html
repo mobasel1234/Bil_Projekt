@@ -3,34 +3,36 @@
 <head>
     <title>Biler</title>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="/app.css">
+
 </head>
 <body>
 
 <h1>Biler</h1>
 
 <div>
-    <a href="/rentals/create">Opret lejeaftale</a> |
-    <a href="/returns/create">Registrér tilbagelevering</a>
+    <a class="links-button" href="/rentals/create">Opret lejeaftale</a> |
+    <a class="links-button" href="/returns/create">Registrér tilbagelevering</a>
 </div>
 
-<table border="1" cellpadding="6">
+<table class="table">
     <thead>
     <tr>
-        <th>ID</th>
-        <th>Stelnummer</th>
-        <th>Mærke</th>
-        <th>Model</th>
-        <th>Status</th>
-        <th>Handling</th>
+        <th class="th">ID</th>
+        <th class="th">Stelnummer</th>
+        <th class="th">Mærke</th>
+        <th class="th">Model</th>
+        <th class="th">Status</th>
+        <th class="th">Handling</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="car : ${cars}">
-        <td th:text="${car.carId}"></td>
-        <td th:text="${car.steelNumber}"></td>
-        <td th:text="${car.brand}"></td>
-        <td th:text="${car.model}"></td>
-        <td th:text="${car.status}"></td>
+        <td class="td" th:text="${car.carId}"></td>
+        <td class="td" th:text="${car.steelNumber}"></td>
+        <td class="td" th:text="${car.brand}"></td>
+        <td class="td" th:text="${car.model}"></td>
+        <td class="td" th:text="${car.status}"></td>
         <td>
             <a th:if="${car.status == 'Udlejet'}"
                th:href="@{/rentals/details(steelNumber=${car.steelNumber})}">

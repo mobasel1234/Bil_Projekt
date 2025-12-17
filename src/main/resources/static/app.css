@@ -357,3 +357,57 @@ tbody tr:hover td {
 .back-link:hover {
     text-decoration: underline;
 }
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.th, .td {
+    padding: 16px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+}
+
+.th {
+    background-color: #4B3EAE;
+    color: white;
+}
+
+.td {
+    color: #333;
+}
+
+.links-button,
+.links-buttondelete,
+.links-button-assign,
+.links-button-assigned{
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 14px;
+    margin: 0 4px;
+    transition: background-color 0.2s ease;
+}
+
+.links-button {
+    background-color: #4B3EAE;
+    color: white;
+}
+
+.links-button:hover {
+    background-color: #362D7E;
+}
+
+h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #2c2c2c;
+}
