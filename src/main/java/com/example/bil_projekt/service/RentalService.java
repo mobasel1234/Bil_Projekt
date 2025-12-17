@@ -84,3 +84,6 @@ public class RentalService {
         return rentalRepo.findActiveRentalDetailsBySteelNumber(steelNumber);
     }
 }
+
+
+

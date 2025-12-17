@@ -50,10 +50,8 @@ public class ReturnServiceTest {
         when(rentalRepo.findActiveByCarId(1)).thenReturn(rental);
         when(inspectionRepo.create(any())).thenReturn(100);
 
-        // Act
         int inspectionId = returnService.registerReturn("STEL001");
 
-        // Assert
         assertEquals(100, inspectionId);
         verify(rentalRepo).closeRental(10);
         verify(carRepo).updateStatus(1, "Skadet");
@@ -66,7 +64,6 @@ public class ReturnServiceTest {
         Car car = new Car(1, "STEL002", "VW", "Golf", "", 0, 0, "Ledig");
         when(carRepo.findBySteelNumber("STEL002")).thenReturn(car);
 
-        // Act + Assert
         assertThrows(
                 IllegalStateException.class,
                 () -> returnService.registerReturn("STEL002")
