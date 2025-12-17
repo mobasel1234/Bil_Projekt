@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+
+<h1>Bil Dashboard</h1>
+
+<div class="actions">
+    <a href="/rentals/create">Opret lejeaftale</a>
+    <a href="/returns/create">Registrér tilbagelevering</a>
+</div>
+
+<table>
+    <tr>
+        <th>Steelnummer</th>
+        <th>Mærke</th>
+        <th>Model</th>
+        <th>Status</th>
+    </tr>
+
+    <tr th:each="car : ${cars}">
+        <td th:text="${car.steelNumber}"></td>
+        <td th:text="${car.brand}"></td>
+        <td th:text="${car.model}"></td>
+        <td th:text="${car.status}"></td>
+    </tr>
+</table>
+
+</body>
+</html>

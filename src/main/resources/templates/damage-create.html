@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registrér skade</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<h1>Registrér skade</h1>
+
+<form method="post" action="/damages/create">
+    <input type="hidden" name="inspectionId" th:value="${inspectionId}">
+
+    <p>
+        <input name="description" placeholder="Beskrivelse" required>
+    </p>
+
+    <p>
+        <input name="severity" placeholder="Alvorlighed (fx Lav / Medium / Høj)" required>
+    </p>
+
+    <p>
+        <input name="damageType" placeholder="Skadetype" required>
+    </p>
+
+    <p>
+        <input type="number" name="costEstimate" step="0.01"
+               placeholder="Pris" required>
+    </p>
+
+    <button type="submit">Gem skade</button>
+</form>
+
+</body>
+</html>

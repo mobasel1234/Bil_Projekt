@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Leje detaljer</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<h1>Leje detaljer</h1>
+
+<h2>Bil</h2>
+<p>
+    Stelnummer:
+    <span th:text="${details.steelNumber}"></span>
+</p>
+<p>
+    Mærke:
+    <span th:text="${details.brand}"></span>
+</p>
+<p>
+    Model:
+    <span th:text="${details.model}"></span>
+</p>
+
+<h2>Kunde</h2>
+<p>
+    Navn:
+    <span th:text="${details.customerName}"></span>
+</p>
+<p>
+    Email:
+    <span th:text="${details.customerEmail}"></span>
+</p>
+<p>
+    Telefon:
+    <span th:text="${details.customerPhone}"></span>
+</p>
+
+<h2>Leje</h2>
+<p>
+    Månedlig pris:
+    <span th:text="${details.monthlyPrice}"></span>
+</p>
+
+<p>
+    <a href="/cars">Tilbage til oversigt</a>
+</p>
+
+</body>
+</html>

@@ -1,72 +1,55 @@
 package com.example.bil_projekt.model;
 
-public class Car {
 
-    private int car_id;
+public class Car {
+    private int carId;
     private String steelNumber;
     private String brand;
     private String model;
-    private String trim_level;
-    private double steel_price;
-    private double registration_tax;
+    private String trimLevel;
+    private double steelPrice;
+    private double registrationTax;
     private String status;
 
-    public Car() {}
 
-    public int getCar_id() {
-        return car_id;
+    public Car(int carId, String steelNumber, String brand, String model, String trimLevel,
+               double steelPrice, double registrationTax, String status) {
+        this.carId = carId;
+        this.steelNumber = steelNumber;
+        this.brand = brand;
+        this.model = model;
+        this.trimLevel = trimLevel;
+        this.steelPrice = steelPrice;
+        this.registrationTax = registrationTax;
+        this.status = status;
     }
 
-    public void setCar_id(int car_id) {
-        this.car_id = car_id;
+    public int getCarId() {
+        return carId;
     }
 
     public String getSteelNumber() {
         return steelNumber;
     }
 
-    public void setSteelNumber(String steelNumber) {
-        this.steelNumber = steelNumber;
-    }
-
     public String getBrand() {
         return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
     }
 
     public String getModel() {
         return model;
     }
 
-    public void setModel(String model) {
-        this.model = model;
+    public String getTrimLevel() {
+        return trimLevel;
     }
 
-    public String getTrim_level() {
-        return trim_level;
+    public double getSteelPrice() {
+        return steelPrice;
     }
 
-    public void setTrim_level(String trim_level) {
-        this.trim_level = trim_level;
-    }
-
-    public double getSteel_price() {
-        return steel_price;
-    }
-
-    public void setSteel_price(double steel_price) {
-        this.steel_price = steel_price;
-    }
-
-    public double getRegistration_tax() {
-        return registration_tax;
-    }
-
-    public void setRegistration_tax(double registration_tax) {
-        this.registration_tax = registration_tax;
+    public double getRegistrationTax() {
+        return registrationTax;
     }
 
     public String getStatus() {
@@ -77,3 +60,4 @@ public class Car {
         this.status = status;
     }
 }
+

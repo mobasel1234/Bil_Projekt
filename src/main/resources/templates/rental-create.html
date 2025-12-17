@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Opret lejeaftale</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<h1>Opret lejeaftale</h1>
+
+<form method="post" action="/rentals/create">
+    <p>
+        <input name="steelNumber" placeholder="Stelnummer" required>
+    </p>
+
+    <h3>Kundeoplysninger</h3>
+
+    <p>
+        <input name="name" placeholder="Navn" required>
+    </p>
+    <p>
+        <input name="email" placeholder="Email" required>
+    </p>
+    <p>
+        <input name="phone" placeholder="Telefon" required>
+    </p>
+    <p>
+        <input name="address" placeholder="Adresse" required>
+    </p>
+
+    <p>
+        <input name="monthlyPrice" type="number" step="0.01"
+               placeholder="Månedlig pris" required>
+    </p>
+
+    <button type="submit">Opret lejeaftale</button>
+</form>
+
+<p>
+    <a href="/cars">Tilbage</a>
+</p>
+
+</body>
+</html>
