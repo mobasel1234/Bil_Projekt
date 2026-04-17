@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy JAR app to Azure Web App - bilprojekt2
+name: Build and deploy JAR app to Azure Web App - bilprojekt3
 
 on:
   push:
@@ -25,7 +25,7 @@ jobs:
           distribution: 'microsoft'
 
       - name: Build with Maven
-        run: mvn clean install -Dspring.profiles.active=dev
+        run: mvn clean install
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -39,25 +39,25 @@ jobs:
     permissions:
       id-token: write #This is required for requesting the JWT
       contents: read #This is required for actions/checkout
-
+  
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
           name: java-app
-
+      
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_75A07F27115242B89002BF7C9B385D31 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_7CC130B078DA4C61B7CEFAFF12A4E7EC }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_C62CFD9F7455409AAA2E4A39C0C4B49B }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_43C8B6A57CFE418E839B34A2DFD14A08 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_645BB9F723C441A2932FC9ED7F1616E1 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_2437F77D4DF54BB38534A8ECF9503B84 }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'bilprojekt2'
+          app-name: 'bilprojekt3'
           slot-name: 'Production'
           package: '*.jar'
           
